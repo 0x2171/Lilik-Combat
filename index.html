@@ -21,9 +21,15 @@
             background-position: center;
         }
         h1 {
-            color: #333;
+            color: #a52a2a; /* Коричневый цвет */
             font-size: 36px;
             margin-bottom: 20px;
+            animation: textShadow 2s infinite;
+        }
+        @keyframes textShadow {
+            0% { text-shadow: 0 0 5px #ffa500; }
+            50% { text-shadow: 0 0 10px #ffa500; }
+            100% { text-shadow: 0 0 5px #ffa500; }
         }
         #coin {
             width: 150px;
@@ -32,22 +38,36 @@
             background-size: cover;
             border-radius: 50%;
             margin: 20px auto;
-            cursor: pointer;
-            transition: transform 0.1s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
         }
         #coin:active {
-            transform: scale(0.9);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: coinPress 0.3s;
+        }
+        @keyframes coinPress {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                transform: scale(0.9);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
         }
         #score {
             font-size: 28px;
             margin-top: 20px;
-            color: #333;
+            color: #a52a2a; /* Коричневый цвет */
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: textShadow 2s infinite;
         }
         #upgrades {
             margin-top: 20px;
@@ -61,16 +81,19 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #a52a2a; /* Коричневый цвет */
+            animation: textShadow 2s infinite;
         }
         .upgrade:hover {
-            background-color: #e0e0e0;
             transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
         .upgrade:active {
+            background-color: #ffa500; /* Оранжевый цвет */
             transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Медиа-запросы для мобильных устройств */
@@ -91,24 +114,27 @@
                 font-size: 14px;
             }
         }
-		
-		#resetButton {
-			margin-top: 20px;
-			padding: 15px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-			background-color: rgba(255, 255, 255, 0.8);
-			cursor: pointer;
-			transition: background-color 0.3s, transform 0.3s;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		}
-		#resetButton:hover {
-			background-color: #e0e0e0;
-			transform: scale(1.05);
-		}
-		#resetButton:active {
-			transform: scale(0.95);
-		}
+
+        #resetButton {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #a52a2a; /* Коричневый цвет */
+            animation: textShadow 2s infinite;
+        }
+        #resetButton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #resetButton:active {
+            background-color: #ffa500; /* Оранжевый цвет */
+            transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
     </style>
 </head>
@@ -120,8 +146,8 @@
         <div class="upgrade" id="upgrade1">Upgrade 1 (Cost: 10 Lilik Coins)</div>
         <div class="upgrade" id="upgrade2">Upgrade 2 (Cost: 50 Lilik Coins)</div>
     </div>
-	<div id="resetButton" class="upgrade">Reset</div>
-	
+    <div id="resetButton" class="upgrade">Reset</div>
+
     <script>
         let score = 0;
         let upgrade1Cost = 10;
@@ -190,17 +216,17 @@
             upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
         }
 
-		const resetButton = document.getElementById('resetButton');
-		resetButton.addEventListener('click', () => {
-			score = 0;
-			coinValue = 1;
-			upgrade1Cost = 10;
-			upgrade2Cost = 50;
-			updateScore();
-			upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
-			upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
-			localStorage.clear();
-		});
+        const resetButton = document.getElementById('resetButton');
+        resetButton.addEventListener('click', () => {
+            score = 0;
+            coinValue = 1;
+            upgrade1Cost = 10;
+            upgrade2Cost = 50;
+            updateScore();
+            upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
+            upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
+            localStorage.clear();
+        });
 
         loadScore();
     </script>
