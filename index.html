@@ -20,7 +20,7 @@
             background-size: cover;
             background-position: center;
         }
-        h1 {
+        .name {
             color: #a52a2a; /* Коричневый цвет */
             font-size: 36px;
             margin-bottom: 20px;
@@ -37,7 +37,8 @@
             background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/LilikCoin.png'); /* Замените на изображение lowpoly головы лисы */
             background-size: cover;
             border-radius: 50%;
-            margin: 20px auto;
+            margin: 80px auto;
+            transform: scale(1.8);
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             outline: none;
@@ -47,15 +48,15 @@
         }
         @keyframes coinPress {
             0% {
-                transform: scale(1);
+                transform: scale(1.8);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
             50% {
-                transform: scale(0.9);
+                transform: scale(1.7);
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             }
             100% {
-                transform: scale(1);
+                transform: scale(1.8);
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         }
@@ -136,17 +137,71 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        .nav-buttons {
+            position: fixed;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #a52a2a; /* Коричневый цвет */
+            animation: textShadow 2s infinite;
+            text-decoration: none;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button:active {
+            background-color: #ffa500; /* Оранжевый цвет */
+            transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <h1>Lilik Combat</h1>
-    <div id="coin"></div>
-    <div id="score">Lilik Coins: 0</div>
-    <div id="upgrades">
-        <div class="upgrade" id="upgrade1">Upgrade 1 (Cost: 10 Lilik Coins)</div>
-        <div class="upgrade" id="upgrade2">Upgrade 2 (Cost: 50 Lilik Coins)</div>
+    <div class="nav-buttons">
+        <a href="#mine" class="nav-button">Mine</a>
+        <a href="#upgrade" class="nav-button">Upgrade</a>
+        <a href="#airdrop" class="nav-button">Airdrop</a>
     </div>
-    <div id="resetButton" class="upgrade">Reset</div>
+
+    <div id="mine" class="page active">
+        <div class="name">Lilik Combat</div>
+        <div id="coin"></div>
+        <div id="score">Lilik Coins: 0</div>
+        <div id="resetButton" class="upgrade">Dev</div>
+    </div>
+
+    <div id="upgrade" class="page">
+        <h1>Upgrade</h1>
+        <div id="upgrades">
+            <div class="upgrade" id="upgrade1">Upgrade 1 (Cost: 10 Lilik Coins)</div>
+            <div class="upgrade" id="upgrade2">Upgrade 2 (Cost: 50 Lilik Coins)</div>
+        </div>
+    </div>
+
+    <div id="airdrop" class="page">
+        <h1>Airdrop</h1>
+        <p>Soon</p>
+    </div>
 
     <script>
         let score = 0;
@@ -229,6 +284,19 @@
         });
 
         loadScore();
+
+        // Navigation
+        const navButtons = document.querySelectorAll('.nav-button');
+        navButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = event.target.getAttribute('href').substring(1);
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
