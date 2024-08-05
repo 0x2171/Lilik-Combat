@@ -16,7 +16,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('https://via.placeholder.com/1920x1080'); /* Замените на фоновое изображение */
+            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/Background.png'); /* Замените на фоновое изображение */
             background-size: cover;
             background-position: center;
         }
@@ -28,7 +28,7 @@
         #coin {
             width: 150px;
             height: 150px;
-            background-image: url('https://via.placeholder.com/150x150'); /* Замените на изображение lowpoly головы лисы */
+            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/LilikCoin.png'); /* Замените на изображение lowpoly головы лисы */
             background-size: cover;
             border-radius: 50%;
             margin: 20px auto;
@@ -91,6 +91,25 @@
                 font-size: 14px;
             }
         }
+		
+		#resetButton {
+			margin-top: 20px;
+			padding: 15px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: rgba(255, 255, 255, 0.8);
+			cursor: pointer;
+			transition: background-color 0.3s, transform 0.3s;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+		#resetButton:hover {
+			background-color: #e0e0e0;
+			transform: scale(1.05);
+		}
+		#resetButton:active {
+			transform: scale(0.95);
+		}
+
     </style>
 </head>
 <body>
@@ -101,7 +120,8 @@
         <div class="upgrade" id="upgrade1">Upgrade 1 (Cost: 10 Lilik Coins)</div>
         <div class="upgrade" id="upgrade2">Upgrade 2 (Cost: 50 Lilik Coins)</div>
     </div>
-
+	<div id="resetButton" class="upgrade">Reset</div>
+	
     <script>
         let score = 0;
         let upgrade1Cost = 10;
@@ -169,6 +189,18 @@
             upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
             upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
         }
+
+		const resetButton = document.getElementById('resetButton');
+		resetButton.addEventListener('click', () => {
+			score = 0;
+			coinValue = 1;
+			upgrade1Cost = 10;
+			upgrade2Cost = 50;
+			updateScore();
+			upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
+			upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
+			localStorage.clear();
+		});
 
         loadScore();
     </script>
