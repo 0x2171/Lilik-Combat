@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Lilik Combat</title>
     <style>
         body {
@@ -48,6 +49,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             outline: none;
+            position: relative;
         }
         #coin:active {
             animation: coinPress 0.3s;
@@ -192,7 +194,7 @@
         .page.active {
             display: block;
         }
-    
+
         #loading-screen {
            position: fixed;
            top: 0;
@@ -222,6 +224,22 @@
              0% { transform: rotate(0deg); }
              100% { transform: rotate(360deg); }
          }
+
+         .coin-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: white;
+            animation: fadeOut 1s ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: translate(100%, -100%) scale(1); }
+            100% { opacity: 0; transform: translate(150%, -50%) scale(1.5); }
+        }
     </style>
 </head>
 <body>
@@ -258,7 +276,11 @@
     </div>
 
     <script>
-    const MIN_LOADING_TIME = 2000; 
+    const tgwindow = window.Telegram.WebApp;
+    tgwindow.isExpanded;
+    tgwindow.expand();
+    
+    const MIN_LOADING_TIME = 2000;
     window.addEventListener('load', () => {
     const loadingScreen = document.getElementById('loading-screen');
     setTimeout(() => {
@@ -280,13 +302,14 @@
         coin.addEventListener('click', () => {
             score += coinValue;
             updateScore();
+            showCoinEffect(coinValue);
         });
 
         upgrade1.addEventListener('click', () => {
             if (score >= upgrade1Cost) {
                 score -= upgrade1Cost;
                 coinValue += 1;
-                upgrade1Cost *= 30;
+                upgrade1Cost *= 2;
                 updateScore();
                 upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
             }
@@ -296,7 +319,7 @@
             if (score >= upgrade2Cost) {
                 score -= upgrade2Cost;
                 coinValue += 2;
-                upgrade2Cost *= 80;
+                upgrade2Cost *= 3;
                 updateScore();
                 upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
             }
@@ -361,6 +384,16 @@
                 document.getElementById(targetId).classList.add('active');
             });
         });
+
+        function showCoinEffect(value) {
+            const effect = document.createElement('div');
+            effect.className = 'coin-effect';
+            effect.textContent = `+${value}`;
+            coin.appendChild(effect);
+            setTimeout(() => {
+                coin.removeChild(effect);
+            }, 1000);
+        }
     </script>
 </body>
 </html>
