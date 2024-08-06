@@ -138,7 +138,7 @@
 
         #resetButton {
             margin-top: 20px;
-            padding: 15px;
+            padding: 1px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
@@ -157,11 +157,21 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        #nav-place {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            bottom: 0px;
+            display: flex;
+            background-color: rgba(160, 82, 45, 0.85);
+        }
+
         .nav-buttons {
             position: fixed;
-            bottom: 20px;
+            bottom: 16px;
             display: flex;
             gap: 10px;
+           
         }
 
         .nav-button {
@@ -174,6 +184,7 @@
             color: #a52a2a; /* Коричневый цвет */
             animation: textShadow 2s infinite;
             text-decoration: none;
+            cursor: none;
         }
 
         .nav-button:hover {
@@ -247,7 +258,7 @@
     <div id="loading-spinner"></div>
         <h1>Loading</h1>
     </div>
-
+    <div id="nav-place"></div>
     <div class="nav-buttons">
         <a href="#mine" class="nav-button">Mine</a>
         <a href="#upgrade" class="nav-button">Upgrade</a>
@@ -272,7 +283,7 @@
 
     <div id="airdrop" class="page">
         <h1>Airdrop</h1>
-        <p>Soon</p>
+        <p>Maybe Soon</p>
     </div>
 
     <script>
@@ -280,7 +291,7 @@
     tgwindow.isExpanded;
     tgwindow.expand();
     
-    const MIN_LOADING_TIME = 2000;
+    const MIN_LOADING_TIME = 1500;
     window.addEventListener('load', () => {
     const loadingScreen = document.getElementById('loading-screen');
     setTimeout(() => {
