@@ -16,7 +16,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/Background.png'); /* Замените на фоновое изображение */
+            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/Background.png');
             background-size: cover;
             background-position: center;
         }
@@ -40,7 +40,7 @@
         #coin {
             width: 150px;
             height: 150px;
-            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/LilikCoin.png'); /* Замените на изображение lowpoly головы лисы */
+            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/LilikCoin.png');
             background-size: cover;
             border-radius: 50%;
             margin: 80px auto;
@@ -192,9 +192,44 @@
         .page.active {
             display: block;
         }
+    
+        #loading-screen {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/Background.png');
+           background-size: cover;
+           background-position: center;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           z-index: 999;
+        }
+
+        #loading-spinner {
+           border: 16px solid #f3f3f3;
+           border-top: 16px solid orange;
+           border-radius: 50%;
+           width: 120px;
+           height: 120px;
+           animation: spin 2s linear infinite;
+         }
+
+         @keyframes spin {
+             0% { transform: rotate(0deg); }
+             100% { transform: rotate(360deg); }
+         }
     </style>
 </head>
 <body>
+    <div id="loading-screen">
+    <div id="loading-spinner"></div>
+        <h1>Loading</h1>
+    </div>
+
     <div class="nav-buttons">
         <a href="#mine" class="nav-button">Mine</a>
         <a href="#upgrade" class="nav-button">Upgrade</a>
@@ -223,6 +258,14 @@
     </div>
 
     <script>
+    const MIN_LOADING_TIME = 2000; 
+    window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        }, MIN_LOADING_TIME);
+    });
+
         let score = 0;
         let upgrade1Cost = 500;
         let upgrade2Cost = 2000;
