@@ -26,6 +26,12 @@
             margin-bottom: 20px;
             animation: textShadow 2s infinite;
         }
+        h1 {
+            color: #a52a2a; /* Коричневый цвет */
+            font-size: 36px;
+            margin-bottom: 20px;
+            animation: textShadow 2s infinite;
+        }
         @keyframes textShadow {
             0% { text-shadow: 0 0 5px #ffa500; }
             50% { text-shadow: 0 0 10px #ffa500; }
@@ -70,6 +76,18 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: textShadow 2s infinite;
         }
+
+        #upgscore {
+            font-size: 15px;
+            margin-top: 20px;
+            color: #a52a2a; /* Коричневый цвет */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: textShadow 2s infinite;
+        }
+
         #upgrades {
             margin-top: 20px;
             display: flex;
@@ -191,10 +209,11 @@
     </div>
 
     <div id="upgrade" class="page">
+        <div id="upgscore">Lilik Coins: 0</div>
         <h1>Upgrade</h1>
         <div id="upgrades">
-            <div class="upgrade" id="upgrade1">Upgrade 1 (Cost: 10 Lilik Coins)</div>
-            <div class="upgrade" id="upgrade2">Upgrade 2 (Cost: 50 Lilik Coins)</div>
+            <div class="upgrade" id="upgrade1">Coins +1 (Cost: 500 Lilik Coins)</div>
+            <div class="upgrade" id="upgrade2">Coins +3 (Cost: 2000 Lilik Coins)</div>
         </div>
     </div>
 
@@ -205,11 +224,12 @@
 
     <script>
         let score = 0;
-        let upgrade1Cost = 10;
-        let upgrade2Cost = 50;
+        let upgrade1Cost = 500;
+        let upgrade2Cost = 2000;
         let coinValue = 1;
 
         const scoreDisplay = document.getElementById('score');
+        const upgScoreDisplay = document.getElementById('upgscore');
         const coin = document.getElementById('coin');
         const upgrade1 = document.getElementById('upgrade1');
         const upgrade2 = document.getElementById('upgrade2');
@@ -223,24 +243,25 @@
             if (score >= upgrade1Cost) {
                 score -= upgrade1Cost;
                 coinValue += 1;
-                upgrade1Cost *= 2;
+                upgrade1Cost *= 30;
                 updateScore();
-                upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
+                upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
             }
         });
 
         upgrade2.addEventListener('click', () => {
             if (score >= upgrade2Cost) {
                 score -= upgrade2Cost;
-                coinValue += 5;
-                upgrade2Cost *= 2;
+                coinValue += 2;
+                upgrade2Cost *= 80;
                 updateScore();
-                upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
+                upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
             }
         });
 
         function updateScore() {
             scoreDisplay.textContent = `Lilik Coins: ${score}`;
+            upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
             localStorage.setItem('lilikScore', score);
             localStorage.setItem('lilikCoinValue', coinValue);
             localStorage.setItem('lilikUpgrade1Cost', upgrade1Cost);
@@ -267,19 +288,19 @@
             }
 
             updateScore();
-            upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
-            upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
+            upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
+            upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
         }
 
         const resetButton = document.getElementById('resetButton');
         resetButton.addEventListener('click', () => {
             score = 0;
             coinValue = 1;
-            upgrade1Cost = 10;
-            upgrade2Cost = 50;
+            upgrade1Cost = 500;
+            upgrade2Cost = 2000;
             updateScore();
-            upgrade1.textContent = `Upgrade 1 (Cost: ${upgrade1Cost} Lilik Coins)`;
-            upgrade2.textContent = `Upgrade 2 (Cost: ${upgrade2Cost} Lilik Coins)`;
+            upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
+            upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
             localStorage.clear();
         });
 
