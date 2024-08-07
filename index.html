@@ -90,7 +90,7 @@
 		}
 		#nameupg {
 			position: fixed;
-			top: 8%;
+			top: 10%;
 			left: 50%;
 			transform: translateX(-50%);
 			display: flex;
@@ -105,10 +105,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-			height: 75vh;
         }
         .upgrade {
-            margin: 5px;
+            margin: 8px;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -281,8 +280,7 @@
             <div class="upgrade" id="upgrade3"></div>
             <div class="upgrade" id="upgrade4"></div>
             <div class="upgrade" id="upgrade5"></div>
-            <div class="upgrade" id="upgrade6"></div>
-            <div class="upgrade" id="upgrade7"></div>
+      
         </div>
     </div>
 
@@ -305,21 +303,21 @@
         });
 
         let score = 0;
-        let upgradeCosts = [500, 2000, 5000, 8000, 15000, 20000, 25000];
+        let upgradeCosts = [500, 2000, 4000, 5000, 8000];
         let coinValue = 1;
 
         const scoreDisplay = document.getElementById('score');
         const upgScoreDisplay = document.getElementById('upgscore');
         const coin = document.getElementById('coin');
         const upgrades = document.querySelectorAll('.upgrade');
-        const upgradeValues = [1, 2, 5, 8, 10, 15, 20];
-		const upgradeMultipliers = [2, 3, 4, 6, 6, 8, 10];
+        const upgradeValues = [1, 2, 5, 8, 10];
+		const upgradeMultipliers = [2, 3, 3, 5, 6];
 		const upgradeImages = [
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f911.png?raw=true',
+		
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f30d.png?raw=true',
+			
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
 		];
@@ -379,7 +377,7 @@
 		resetButton.addEventListener('click', () => {
 			score = 0;
 			coinValue = 1;
-			upgradeCosts = [500, 2000, 5000, 8000, 15000, 20000, 25000];
+			upgradeCosts = [500, 2000, 4000, 5000, 8000];
 			updateScore();
 			localStorage.clear();
 		});
