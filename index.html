@@ -62,7 +62,7 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         }
-        #score, #upgscore {
+        #score{
             font-size: 28px;
             margin-top: 20px;
             color: #a52a2a;
@@ -72,8 +72,36 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: textShadow 2s infinite;
         }
+		#upgscore {
+			position: fixed;
+			top: 10px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			font-size: 18px;
+			color: #a52a2a;
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px 20px;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			animation: textShadow 2s infinite;
+		}
+		#nameupg {
+			position: fixed;
+			top: 8%;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			color: #a52a2a;
+            font-size: 26px;
+			animation: textShadow 2s infinite;
+		}
         #upgrades {
-            margin-top: 20px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -245,7 +273,7 @@
 
     <div id="upgrade" class="page">
         <div id="upgscore">Lilik Coins: 0</div>
-        <h1>Upgrade</h1>
+        <div id="nameupg">Upgrade</div>
         <div id="upgrades">
             <div class="upgrade" id="upgrade1"></div>
             <div class="upgrade" id="upgrade2"></div>
