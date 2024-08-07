@@ -17,18 +17,12 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/Background.png');
+            background-image: url('https://github.com/0x2171/Lilik-Combat/blob/main/images/Background.png?raw=true');
             background-size: cover;
             background-position: center;
         }
-        .name {
-            color: #a52a2a; /* Коричневый цвет */
-            font-size: 36px;
-            margin-bottom: 20px;
-            animation: textShadow 2s infinite;
-        }
-        h1 {
-            color: #a52a2a; /* Коричневый цвет */
+        .name, h1, h3 {
+            color: #a52a2a;
             font-size: 36px;
             margin-bottom: 20px;
             animation: textShadow 2s infinite;
@@ -41,7 +35,7 @@
         #coin {
             width: 150px;
             height: 150px;
-            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/LilikCoin.png');
+            background-image: url('https://github.com/0x2171/Lilik-Combat/blob/main/images/LilikCoin.png?raw=true');
             background-size: cover;
             border-radius: 50%;
             margin: 80px auto;
@@ -68,28 +62,16 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         }
-        #score {
+        #score, #upgscore {
             font-size: 28px;
             margin-top: 20px;
-            color: #a52a2a; /* Коричневый цвет */
+            color: #a52a2a;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: textShadow 2s infinite;
         }
-
-        #upgscore {
-            font-size: 15px;
-            margin-top: 20px;
-            color: #a52a2a; /* Коричневый цвет */
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: textShadow 2s infinite;
-        }
-
         #upgrades {
             margin-top: 20px;
             display: flex;
@@ -104,7 +86,7 @@
             background-color: rgba(255, 255, 255, 0.8);
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #a52a2a; /* Коричневый цвет */
+            color: #a52a2a;
             animation: textShadow 2s infinite;
         }
         .upgrade:hover {
@@ -112,12 +94,10 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
         .upgrade:active {
-            background-color: #ffa500; /* Оранжевый цвет */
+            background-color: #ffa500;
             transform: scale(0.95);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        /* Медиа-запросы для мобильных устройств */
         @media (max-width: 600px) {
             h1 {
                 font-size: 24px;
@@ -135,16 +115,19 @@
                 font-size: 14px;
             }
         }
-
         #resetButton {
-            margin-top: 20px;
+            position: fixed;
+			top: 1px;
+			left: 0; 
+			margin-top: 0;
             padding: 1px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #a52a2a; /* Коричневый цвет */
+			font-size: 10px;
+            color: #a52a2a;
             animation: textShadow 2s infinite;
         }
         #resetButton:hover {
@@ -152,11 +135,10 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
         #resetButton:active {
-            background-color: #ffa500; /* Оранжевый цвет */
+            background-color: #ffa500;
             transform: scale(0.95);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
         #nav-place {
             width: 100%;
             height: 70px;
@@ -165,15 +147,12 @@
             display: flex;
             background-color: rgba(160, 82, 45, 0.85);
         }
-
         .nav-buttons {
             position: fixed;
             bottom: 16px;
             display: flex;
             gap: 10px;
-           
         }
-
         .nav-button {
             padding: 10px 20px;
             border: 1px solid #ccc;
@@ -181,38 +160,33 @@
             background-color: rgba(255, 255, 255, 0.8);
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #a52a2a; /* Коричневый цвет */
+            color: #a52a2a;
             animation: textShadow 2s infinite;
             text-decoration: none;
             cursor: none;
         }
-
         .nav-button:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
-
         .nav-button:active {
-            background-color: #ffa500; /* Оранжевый цвет */
+            background-color: #ffa500;
             transform: scale(0.95);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
         .page {
             display: none;
         }
-
         .page.active {
             display: block;
         }
-
         #loading-screen {
            position: fixed;
            top: 0;
            left: 0;
            width: 100%;
            height: 100%;
-           background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Combat/main/Background.png');
+           background-image: url('https://github.com/0x2171/Lilik-Combat/blob/main/images/Background.png?raw=true');
            background-size: cover;
            background-position: center;
            display: flex;
@@ -221,7 +195,6 @@
            align-items: center;
            z-index: 999;
         }
-
         #loading-spinner {
            border: 16px solid #f3f3f3;
            border-top: 16px solid orange;
@@ -230,12 +203,10 @@
            height: 120px;
            animation: spin 2s linear infinite;
          }
-
          @keyframes spin {
              0% { transform: rotate(0deg); }
              100% { transform: rotate(360deg); }
          }
-
          .coin-effect {
             position: absolute;
             top: 50%;
@@ -245,8 +216,8 @@
             color: white;
             animation: fadeOut 1s ease-in-out;
             pointer-events: none;
+			cursor: none;
         }
-
         @keyframes fadeOut {
             0% { opacity: 1; transform: translate(100%, -100%) scale(1); }
             100% { opacity: 0; transform: translate(150%, -50%) scale(1.5); }
@@ -255,7 +226,7 @@
 </head>
 <body>
     <div id="loading-screen">
-    <div id="loading-spinner"></div>
+        <div id="loading-spinner"></div>
         <h1>Loading</h1>
     </div>
     <div id="nav-place"></div>
@@ -269,46 +240,60 @@
         <div class="name">Lilik Combat</div>
         <div id="coin"></div>
         <div id="score">Lilik Coins: 0</div>
-        <div id="resetButton" class="upgrade">Reset all progress</div>
+        <div id="resetButton">Reset all progress</div>
     </div>
 
     <div id="upgrade" class="page">
         <div id="upgscore">Lilik Coins: 0</div>
         <h1>Upgrade</h1>
         <div id="upgrades">
-            <div class="upgrade" id="upgrade1">Coins +1 (Cost: 500 Lilik Coins)</div>
-            <div class="upgrade" id="upgrade2">Coins +3 (Cost: 2000 Lilik Coins)</div>
+            <div class="upgrade" id="upgrade1"></div>
+            <div class="upgrade" id="upgrade2"></div>
+            <div class="upgrade" id="upgrade3"></div>
+            <div class="upgrade" id="upgrade4"></div>
+            <div class="upgrade" id="upgrade5"></div>
+            <div class="upgrade" id="upgrade6"></div>
+            <div class="upgrade" id="upgrade7"></div>
         </div>
     </div>
 
     <div id="airdrop" class="page">
         <h1>Airdrop</h1>
-        <p>Maybe Soon</p>
+        <h3>Maybe Soon</h3>
     </div>
 
     <script>
-    const tgwindow = window.Telegram.WebApp;
-    tgwindow.isExpanded;
-    tgwindow.expand();
-    
-    const MIN_LOADING_TIME = 1500;
-    window.addEventListener('load', () => {
-    const loadingScreen = document.getElementById('loading-screen');
-    setTimeout(() => {
-        loadingScreen.style.display = 'none';
-        }, MIN_LOADING_TIME);
-    });
+        const tgwindow = window.Telegram.WebApp;
+        tgwindow.isExpanded;
+        tgwindow.expand();
+
+        const MIN_LOADING_TIME = 1500;
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, MIN_LOADING_TIME);
+        });
 
         let score = 0;
-        let upgrade1Cost = 500;
-        let upgrade2Cost = 2000;
+        let upgradeCosts = [500, 2000, 5000, 8000, 15000, 20000, 25000];
         let coinValue = 1;
 
         const scoreDisplay = document.getElementById('score');
         const upgScoreDisplay = document.getElementById('upgscore');
         const coin = document.getElementById('coin');
-        const upgrade1 = document.getElementById('upgrade1');
-        const upgrade2 = document.getElementById('upgrade2');
+        const upgrades = document.querySelectorAll('.upgrade');
+        const upgradeValues = [1, 2, 5, 8, 10, 15, 20];
+		const upgradeMultipliers = [2, 3, 4, 6, 6, 8, 10];
+		const upgradeImages = [
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f911.png?raw=true',
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f30d.png?raw=true',
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
+			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
+		];
 
         coin.addEventListener('click', () => {
             score += coinValue;
@@ -316,70 +301,59 @@
             showCoinEffect(coinValue);
         });
 
-        upgrade1.addEventListener('click', () => {
-            if (score >= upgrade1Cost) {
-                score -= upgrade1Cost;
-                coinValue += 1;
-                upgrade1Cost *= 2;
-                updateScore();
-                upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
-            }
-        });
-
-        upgrade2.addEventListener('click', () => {
-            if (score >= upgrade2Cost) {
-                score -= upgrade2Cost;
-                coinValue += 2;
-                upgrade2Cost *= 3;
-                updateScore();
-                upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
-            }
-        });
+        upgrades.forEach((upgrade, index) => {
+			upgrade.addEventListener('click', () => {
+				if (score >= upgradeCosts[index]) {
+					score -= upgradeCosts[index];
+					coinValue += upgradeValues[index];
+					upgradeCosts[index] *= upgradeMultipliers[index];
+					updateScore();
+					upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+				}
+			});
+		});
 
         function updateScore() {
-            scoreDisplay.textContent = `Lilik Coins: ${score}`;
-            upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
-            localStorage.setItem('lilikScore', score);
-            localStorage.setItem('lilikCoinValue', coinValue);
-            localStorage.setItem('lilikUpgrade1Cost', upgrade1Cost);
-            localStorage.setItem('lilikUpgrade2Cost', upgrade2Cost);
-        }
+			scoreDisplay.textContent = `Lilik Coins: ${score}`;
+			upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
+			localStorage.setItem('lilikScore', score);
+			localStorage.setItem('lilikCoinValue', coinValue);
+			upgradeCosts.forEach((cost, index) => {
+				localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
+			});
+		}
 
         function loadScore() {
-            const savedScore = localStorage.getItem('lilikScore');
-            const savedCoinValue = localStorage.getItem('lilikCoinValue');
-            const savedUpgrade1Cost = localStorage.getItem('lilikUpgrade1Cost');
-            const savedUpgrade2Cost = localStorage.getItem('lilikUpgrade2Cost');
+			const savedScore = localStorage.getItem('lilikScore');
+			const savedCoinValue = localStorage.getItem('lilikCoinValue');
 
-            if (savedScore !== null) {
-                score = parseInt(savedScore, 10);
-            }
-            if (savedCoinValue !== null) {
-                coinValue = parseInt(savedCoinValue, 10);
-            }
-            if (savedUpgrade1Cost !== null) {
-                upgrade1Cost = parseInt(savedUpgrade1Cost, 10);
-            }
-            if (savedUpgrade2Cost !== null) {
-                upgrade2Cost = parseInt(savedUpgrade2Cost, 10);
-            }
+			if (savedScore !== null) {
+				score = parseInt(savedScore, 10);
+			}
+			if (savedCoinValue !== null) {
+				coinValue = parseInt(savedCoinValue, 10);
+			}
+			upgradeCosts.forEach((cost, index) => {
+				const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
+				if (savedCost !== null) {
+					upgradeCosts[index] = parseInt(savedCost, 10);
+				}
+			});
 
-            updateScore();
-            upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
-            upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
-        }
+			updateScore();
+			upgrades.forEach((upgrade, index) => {
+				upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+			});
+		}
 
         const resetButton = document.getElementById('resetButton');
-        resetButton.addEventListener('click', () => {
-            score = 0;
-            coinValue = 1;
-            upgrade1Cost = 500;
-            upgrade2Cost = 2000;
-            updateScore();
-            upgrade1.textContent = `Coins +1 (Cost: ${upgrade1Cost} Lilik Coins)`;
-            upgrade2.textContent = `Coins +3 (Cost: ${upgrade2Cost} Lilik Coins)`;
-            localStorage.clear();
-        });
+		resetButton.addEventListener('click', () => {
+			score = 0;
+			coinValue = 1;
+			upgradeCosts = [500, 2000, 5000, 8000, 15000, 20000, 25000];
+			updateScore();
+			localStorage.clear();
+		});
 
         loadScore();
 
