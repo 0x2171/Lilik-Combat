@@ -146,7 +146,7 @@
         #resetButton {
             position: fixed;
 			top: 1px;
-			left: 0; 
+			left: 0;
 			margin-top: 0;
             padding: 1px;
             border: 1px solid #ccc;
@@ -250,6 +250,39 @@
             0% { opacity: 1; transform: translate(100%, -100%) scale(1); }
             100% { opacity: 0; transform: translate(150%, -50%) scale(1.5); }
         }
+        #progress-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #progress-bar {
+            width: 200px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin: 0 10px;
+            position: relative;
+        }
+        #progress-bar-fill {
+            height: 100%;
+            background-color: #ffa500;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        #progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+        }
+        #current-level {
+            color: #ffa500;
+        }
+    #next-level {
+            color: #ffa500;
+        }
     </style>
 </head>
 <body>
@@ -268,6 +301,14 @@
         <div class="name">Lilik Combat</div>
         <div id="coin"></div>
         <div id="score">Lilik Coins: 0</div>
+        <div id="progress-container">
+            <div id="current-level">1</div>
+            <div id="progress-bar">
+                <div id="progress-bar-fill"></div>
+                <div id="progress-text"></div>
+            </div>
+            <div id="next-level">2</div>
+        </div>
         <div id="resetButton">Reset all progress</div>
     </div>
 
@@ -280,7 +321,6 @@
             <div class="upgrade" id="upgrade3"></div>
             <div class="upgrade" id="upgrade4"></div>
             <div class="upgrade" id="upgrade5"></div>
-      
         </div>
     </div>
 
@@ -305,6 +345,8 @@
         let score = 0;
         let upgradeCosts = [500, 2000, 4000, 5000, 8000];
         let coinValue = 1;
+        let currentLevel = 1;
+        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000]; // Define levels
 
         const scoreDisplay = document.getElementById('score');
         const upgScoreDisplay = document.getElementById('upgscore');
@@ -315,16 +357,20 @@
 		const upgradeImages = [
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
-		
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
-			
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
 			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
 		];
 
+        const currentLevelDisplay = document.getElementById('current-level');
+        const nextLevelDisplay = document.getElementById('next-level');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        const progressText = document.getElementById('progress-text');
+
         coin.addEventListener('click', () => {
             score += coinValue;
             updateScore();
+            updateLevel();
             showCoinEffect(coinValue);
         });
 
@@ -350,37 +396,60 @@
 			});
 		}
 
+        function updateLevel() {
+    for (let i = 0; i < levels.length; i++) {
+        if (score < levels[i]) {
+            currentLevel = i + 1;
+            break;
+        }
+    }
+    currentLevelDisplay.textContent = currentLevel;
+    nextLevelDisplay.textContent = currentLevel + 1;
+    const progress = (score - (levels[currentLevel - 2] || 0)) / (levels[currentLevel - 1] - (levels[currentLevel - 2] || 0)) * 100;
+    progressBarFill.style.width = `${progress}%`;
+    progressText.textContent = `${Math.round(progress)}%`;
+}
+    
+
         function loadScore() {
-			const savedScore = localStorage.getItem('lilikScore');
-			const savedCoinValue = localStorage.getItem('lilikCoinValue');
+    const savedScore = localStorage.getItem('lilikScore');
+    const savedCoinValue = localStorage.getItem('lilikCoinValue');
+    const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
 
-			if (savedScore !== null) {
-				score = parseInt(savedScore, 10);
-			}
-			if (savedCoinValue !== null) {
-				coinValue = parseInt(savedCoinValue, 10);
-			}
-			upgradeCosts.forEach((cost, index) => {
-				const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
-				if (savedCost !== null) {
-					upgradeCosts[index] = parseInt(savedCost, 10);
-				}
-			});
+    if (savedScore !== null) {
+        score = parseInt(savedScore, 10);
+    }
+    if (savedCoinValue !== null) {
+        coinValue = parseInt(savedCoinValue, 10);
+    }
+    if (savedCurrentLevel !== null) {
+        currentLevel = parseInt(savedCurrentLevel, 10);
+    }
+    upgradeCosts.forEach((cost, index) => {
+        const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
+        if (savedCost !== null) {
+            upgradeCosts[index] = parseInt(savedCost, 10);
+        }
+    });
 
-			updateScore();
-			upgrades.forEach((upgrade, index) => {
-				upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
-			});
-		}
+    updateScore();
+    updateLevel();
+    upgrades.forEach((upgrade, index) => {
+        upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+    });
+}
 
         const resetButton = document.getElementById('resetButton');
-		resetButton.addEventListener('click', () => {
-			score = 0;
-			coinValue = 1;
-			upgradeCosts = [500, 2000, 4000, 5000, 8000];
-			updateScore();
-			localStorage.clear();
-		});
+resetButton.addEventListener('click', () => {
+    score = 0;
+    coinValue = 1;
+    upgradeCosts = [500, 2000, 4000, 5000, 8000];
+    currentLevel = 1;
+    updateScore();
+    updateLevel();
+    localStorage.clear();
+});
+
 
         loadScore();
 
