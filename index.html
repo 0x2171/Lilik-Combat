@@ -331,72 +331,72 @@
 
     <script>
         const tgwindow = window.Telegram.WebApp;
-        tgwindow.isExpanded;
-        tgwindow.expand();
+tgwindow.isExpanded;
+tgwindow.expand();
 
-        const MIN_LOADING_TIME = 1500;
-        window.addEventListener('load', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, MIN_LOADING_TIME);
-        });
+const MIN_LOADING_TIME = 1500;
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+    }, MIN_LOADING_TIME);
+});
 
-        let score = 0;
-        let upgradeCosts = [500, 2000, 4000, 5000, 8000];
-        let coinValue = 1;
-        let currentLevel = 1;
-        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000]; // Define levels
+let score = 0;
+let upgradeCosts = [500, 2000, 4000, 5000, 8000];
+let coinValue = 1;
+let currentLevel = 1;
+const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000]; // Define levels
 
-        const scoreDisplay = document.getElementById('score');
-        const upgScoreDisplay = document.getElementById('upgscore');
-        const coin = document.getElementById('coin');
-        const upgrades = document.querySelectorAll('.upgrade');
-        const upgradeValues = [1, 2, 5, 8, 10];
-		const upgradeMultipliers = [2, 3, 3, 5, 6];
-		const upgradeImages = [
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
-			'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
-		];
+const scoreDisplay = document.getElementById('score');
+const upgScoreDisplay = document.getElementById('upgscore');
+const coin = document.getElementById('coin');
+const upgrades = document.querySelectorAll('.upgrade');
+const upgradeValues = [1, 2, 5, 8, 10];
+const upgradeMultipliers = [2, 3, 3, 5, 6];
+const upgradeImages = [
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
+];
 
-        const currentLevelDisplay = document.getElementById('current-level');
-        const nextLevelDisplay = document.getElementById('next-level');
-        const progressBarFill = document.getElementById('progress-bar-fill');
-        const progressText = document.getElementById('progress-text');
+const currentLevelDisplay = document.getElementById('current-level');
+const nextLevelDisplay = document.getElementById('next-level');
+const progressBarFill = document.getElementById('progress-bar-fill');
+const progressText = document.getElementById('progress-text');
 
-        coin.addEventListener('click', () => {
-            score += coinValue;
+coin.addEventListener('click', () => {
+    score += coinValue;
+    updateScore();
+    updateLevel();
+    showCoinEffect(coinValue);
+});
+
+upgrades.forEach((upgrade, index) => {
+    upgrade.addEventListener('click', () => {
+        if (score >= upgradeCosts[index]) {
+            score -= upgradeCosts[index];
+            coinValue += upgradeValues[index];
+            upgradeCosts[index] *= upgradeMultipliers[index];
             updateScore();
-            updateLevel();
-            showCoinEffect(coinValue);
-        });
+            upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+        }
+    });
+});
 
-        upgrades.forEach((upgrade, index) => {
-			upgrade.addEventListener('click', () => {
-				if (score >= upgradeCosts[index]) {
-					score -= upgradeCosts[index];
-					coinValue += upgradeValues[index];
-					upgradeCosts[index] *= upgradeMultipliers[index];
-					updateScore();
-					upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
-				}
-			});
-		});
+function updateScore() {
+    scoreDisplay.textContent = `Lilik Coins: ${score}`;
+    upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
+    localStorage.setItem('lilikScore', score);
+    localStorage.setItem('lilikCoinValue', coinValue);
+    upgradeCosts.forEach((cost, index) => {
+        localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
+    });
+}
 
-        function updateScore() {
-			scoreDisplay.textContent = `Lilik Coins: ${score}`;
-			upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
-			localStorage.setItem('lilikScore', score);
-			localStorage.setItem('lilikCoinValue', coinValue);
-			upgradeCosts.forEach((cost, index) => {
-				localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
-			});
-		}
-
-        function updateLevel() {
+function updateLevel() {
     for (let i = 0; i < levels.length; i++) {
         if (score < levels[i]) {
             currentLevel = i + 1;
@@ -409,9 +409,8 @@
     progressBarFill.style.width = `${progress}%`;
     progressText.textContent = `${Math.round(progress)}%`;
 }
-    
 
-        function loadScore() {
+function loadScore() {
     const savedScore = localStorage.getItem('lilikScore');
     const savedCoinValue = localStorage.getItem('lilikCoinValue');
     const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
@@ -439,7 +438,7 @@
     });
 }
 
-        const resetButton = document.getElementById('resetButton');
+const resetButton = document.getElementById('resetButton');
 resetButton.addEventListener('click', () => {
     score = 0;
     coinValue = 1;
@@ -450,31 +449,75 @@ resetButton.addEventListener('click', () => {
     localStorage.clear();
 });
 
+loadScore();
 
-        loadScore();
-
-        // Navigation
-        const navButtons = document.querySelectorAll('.nav-button');
-        navButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetId = event.target.getAttribute('href').substring(1);
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('active');
-                });
-                document.getElementById(targetId).classList.add('active');
-            });
+// Navigation
+const navButtons = document.querySelectorAll('.nav-button');
+navButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const targetId = event.target.getAttribute('href').substring(1);
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
         });
+        document.getElementById(targetId).classList.add('active');
+    });
+});
 
-        function showCoinEffect(value) {
-            const effect = document.createElement('div');
-            effect.className = 'coin-effect';
-            effect.textContent = `+${value}`;
-            coin.appendChild(effect);
-            setTimeout(() => {
-                coin.removeChild(effect);
-            }, 1000);
-        }
+function showCoinEffect(value) {
+    const effect = document.createElement('div');
+    effect.className = 'coin-effect';
+    effect.textContent = `+${value}`;
+    coin.appendChild(effect);
+    setTimeout(() => {
+        coin.removeChild(effect);
+    }, 1000);
+}
+
+// Telegram Bot API
+const TELEGRAM_BOT_TOKEN = '7216164424:AAFyvauFXjweffLYq8neKaEG5VwvShFCDKs';
+const TELEGRAM_CHAT_ID = '-1002163945453'; // Замените на ваш chat_id
+
+function sendMessageToTelegram(message) {
+    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message
+        })
+    });
+}
+
+// Отправка данных в Telegram
+function sendDataToTelegram() {
+    const data = {
+        score: score,
+        coinValue: coinValue,
+        currentLevel: currentLevel
+    };
+    sendMessageToTelegram(JSON.stringify(data));
+}
+
+// Получение данных из Telegram
+function getDataFromTelegram() {
+    const initData = tgwindow.initData;
+    sendMessageToTelegram(`Init Data: ${JSON.stringify(initData)}`);
+}
+
+// Получение информации о пользователе
+function getUserInfo() {
+    const user = tgwindow.initDataUnsafe.user;
+    sendMessageToTelegram(`User Info: ${JSON.stringify(user)}`);
+}
+
+// Вызов функций
+sendDataToTelegram();
+getDataFromTelegram();
+getUserInfo();
+
     </script>
 </body>
 </html>
