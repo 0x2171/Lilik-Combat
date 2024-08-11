@@ -435,8 +435,7 @@ const achievements = [
     { name: 'Click Master', description: 'Earn 1000 coins', condition: () => score >= 1000 },
     { name: 'High Level', description: 'Reach level 10', condition: () => currentLevel >= 10 },
     { name: 'Beloved LiliFox', description: 'Earn 224800 coins', condition: () => score >= 224800 },
-    { name: 'Upgraded', description: 'Use all upgrades at least once', condition: () => upgradeValues.every(value => coinValue >= value) },
-    { name: 'Achievement Master', description: 'Get all achievements', condition: () => achievements.every(achievement => achievement.condition()) }
+    { name: 'Upgraded', description: 'Use all upgrades at least once', condition: () => upgradeValues.every(value => coinValue >= value) }
 ];
 
 function checkAchievements() {
