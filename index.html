@@ -80,12 +80,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 16px;
+            font-size: 18px;
             color: #a52a2a;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px 20px;
             border-radius: 5px;
-            max-width: 150px;
+            max-width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: textShadow 2s infinite;
         }
@@ -180,10 +180,10 @@
             position: fixed;
             bottom: 16px;
             display: flex;
-            gap: 10px;
+            gap: 1px;
         }
         .nav-button {
-            padding: 10px 20px;
+            padding: 1px 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.8);
@@ -284,6 +284,37 @@
     #next-level {
             color: #ffa500;
         }
+    
+    #achievement-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievement {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #a52a2a;
+    animation: textShadow 2s infinite;
+    display: flex;
+    align-items: center;
+}
+
+.achievement.unlocked {
+    background-color: #ffa500;
+    color: white;
+}
+
+.achievement-check {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
     </style>
 </head>
 <body>
@@ -295,7 +326,9 @@
     <div class="nav-buttons">
         <a href="#mine" class="nav-button">🏠 Mine</a>
         <a href="#upgrade" class="nav-button">🔧 Upgrade</a>
+        <a href="#achievements" class="nav-button">🏆 Achievs</a>
         <a href="#airdrop" class="nav-button">🛸 Airdrop</a>
+        
     </div>
 
     <div id="mine" class="page active">
@@ -330,150 +363,190 @@
         <h3>Maybe Soon</h3>
     </div>
 
+     <div id="achievements" class="page">
+    <h1>Achievements</h1>
+    <div id="achievement-list"></div>
+</div>
+    
     <script>
         const tgwindow = window.Telegram.WebApp;
-        tgwindow.isExpanded;
-        tgwindow.expand();
+tgwindow.isExpanded;
+tgwindow.expand();
 
-        const MIN_LOADING_TIME = 1500;
-        window.addEventListener('load', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, MIN_LOADING_TIME);
-        });
+const MIN_LOADING_TIME = 1500;
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+    }, MIN_LOADING_TIME);
+});
 
-        let score = 0;
-        let upgradeCosts = [500, 2000, 4000, 5000, 8000];
-        let coinValue = 1;
-        let currentLevel = 1;
-        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
+let score = 0;
+let upgradeCosts = [500, 2000, 4000, 5000, 8000];
+let coinValue = 1;
+let currentLevel = 1;
+const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
 
-        const scoreDisplay = document.getElementById('score');
-        const upgScoreDisplay = document.getElementById('upgscore');
-        const coin = document.getElementById('coin');
-        const upgrades = document.querySelectorAll('.upgrade');
-        const upgradeValues = [1, 2, 5, 8, 10];
-        const upgradeMultipliers = [2, 3, 3, 5, 6];
-        const upgradeImages = [
-            'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
-            'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
-            'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
-            'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
-            'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
-        ];
+const scoreDisplay = document.getElementById('score');
+const upgScoreDisplay = document.getElementById('upgscore');
+const coin = document.getElementById('coin');
+const upgrades = document.querySelectorAll('.upgrade');
+const upgradeValues = [1, 2, 5, 8, 10];
+const upgradeMultipliers = [2, 3, 3, 5, 6];
+const upgradeImages = [
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u2615.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f60e.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f9c3_u1f98a.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f304_u1f98a.png?raw=true',
+    'https://github.com/0x2171/Lilik-Combat/blob/main/images/u1f98a_u1f98a.png?raw=true'
+];
 
-        const currentLevelDisplay = document.getElementById('current-level');
-        const nextLevelDisplay = document.getElementById('next-level');
-        const progressBarFill = document.getElementById('progress-bar-fill');
-        const progressText = document.getElementById('progress-text');
+const currentLevelDisplay = document.getElementById('current-level');
+const nextLevelDisplay = document.getElementById('next-level');
+const progressBarFill = document.getElementById('progress-bar-fill');
+const progressText = document.getElementById('progress-text');
 
-        coin.addEventListener('click', () => {
-            score += coinValue;
+const achievements = [
+    { name: 'First Coin', description: 'Earn your first coin', condition: () => score >= 1 },
+    { name: '100 Coins', description: 'Earn 100 coins', condition: () => score >= 100 },
+  
+];
+
+function checkAchievements() {
+    achievements.forEach((achievement, index) => {
+        const achievementItem = document.getElementById(`achievement-${index}`);
+        if (achievement.condition()) {
+            achievementItem.classList.add('unlocked');
+            achievementItem.querySelector('.achievement-check').textContent = '✅';
+        }
+    });
+}
+
+function updateAchievements() {
+    const achievementList = document.getElementById('achievement-list');
+    achievementList.innerHTML = '';
+    achievements.forEach((achievement, index) => {
+        const achievementItem = document.createElement('div');
+        achievementItem.id = `achievement-${index}`;
+        achievementItem.className = 'achievement';
+        achievementItem.innerHTML = `
+            <span class="achievement-check">❌</span>
+            <span>${achievement.name}: ${achievement.description}</span>
+        `;
+        achievementList.appendChild(achievementItem);
+    });
+    checkAchievements();
+}
+
+coin.addEventListener('click', () => {
+    score += coinValue;
+    updateScore();
+    updateLevel();
+    showCoinEffect(coinValue);
+    checkAchievements();
+});
+
+upgrades.forEach((upgrade, index) => {
+    upgrade.addEventListener('click', () => {
+        if (score >= upgradeCosts[index]) {
+            score -= upgradeCosts[index];
+            coinValue += upgradeValues[index];
+            upgradeCosts[index] *= upgradeMultipliers[index];
             updateScore();
-            updateLevel();
-            showCoinEffect(coinValue);
-        });
-
-        upgrades.forEach((upgrade, index) => {
-            upgrade.addEventListener('click', () => {
-                if (score >= upgradeCosts[index]) {
-                    score -= upgradeCosts[index];
-                    coinValue += upgradeValues[index];
-                    upgradeCosts[index] *= upgradeMultipliers[index];
-                    updateScore();
-                    upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
-                }
-            });
-        });
-
-        function updateScore() {
-            scoreDisplay.textContent = `Lilik Coins: ${score}`;
-            upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
-            localStorage.setItem('lilikScore', score);
-            localStorage.setItem('lilikCoinValue', coinValue);
-            upgradeCosts.forEach((cost, index) => {
-                localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
-            });
+            upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
         }
+    });
+});
 
-        function updateLevel() {
-            for (let i = 0; i < levels.length; i++) {
-                if (score < levels[i]) {
-                    currentLevel = i + 1;
-                    break;
-                }
-            }
-            currentLevelDisplay.textContent = currentLevel;
-            nextLevelDisplay.textContent = currentLevel + 1;
-            const progress = (score - (levels[currentLevel - 2] || 0)) / (levels[currentLevel - 1] - (levels[currentLevel - 2] || 0)) * 100;
-            progressBarFill.style.width = `${progress}%`;
-            progressText.textContent = `${Math.round(progress)}%`;
+function updateScore() {
+    scoreDisplay.textContent = `Lilik Coins: ${score}`;
+    upgScoreDisplay.textContent = `Lilik Coins: ${score}`;
+    localStorage.setItem('lilikScore', score);
+    localStorage.setItem('lilikCoinValue', coinValue);
+    upgradeCosts.forEach((cost, index) => {
+        localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
+    });
+}
+
+function updateLevel() {
+    for (let i = 0; i < levels.length; i++) {
+        if (score < levels[i]) {
+            currentLevel = i + 1;
+            break;
         }
+    }
+    currentLevelDisplay.textContent = currentLevel;
+    nextLevelDisplay.textContent = currentLevel + 1;
+    const progress = (score - (levels[currentLevel - 2] || 0)) / (levels[currentLevel - 1] - (levels[currentLevel - 2] || 0)) * 100;
+    progressBarFill.style.width = `${progress}%`;
+    progressText.textContent = `${Math.round(progress)}%`;
+}
 
-        function loadScore() {
-            const savedScore = localStorage.getItem('lilikScore');
-            const savedCoinValue = localStorage.getItem('lilikCoinValue');
-            const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
+function loadScore() {
+    const savedScore = localStorage.getItem('lilikScore');
+    const savedCoinValue = localStorage.getItem('lilikCoinValue');
+    const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
 
-            if (savedScore !== null) {
-                score = parseInt(savedScore, 10);
-            }
-            if (savedCoinValue !== null) {
-                coinValue = parseInt(savedCoinValue, 10);
-            }
-            if (savedCurrentLevel !== null) {
-                currentLevel = parseInt(savedCurrentLevel, 10);
-            }
-            upgradeCosts.forEach((cost, index) => {
-                const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
-                if (savedCost !== null) {
-                    upgradeCosts[index] = parseInt(savedCost, 10);
-                }
-            });
-
-            updateScore();
-            updateLevel();
-            upgrades.forEach((upgrade, index) => {
-                upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
-            });
+    if (savedScore !== null) {
+        score = parseInt(savedScore, 10);
+    }
+    if (savedCoinValue !== null) {
+        coinValue = parseInt(savedCoinValue, 10);
+    }
+    if (savedCurrentLevel !== null) {
+        currentLevel = parseInt(savedCurrentLevel, 10);
+    }
+    upgradeCosts.forEach((cost, index) => {
+        const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
+        if (savedCost !== null) {
+            upgradeCosts[index] = parseInt(savedCost, 10);
         }
+    });
 
-        const resetButton = document.getElementById('resetButton');
-        resetButton.addEventListener('click', () => {
-            score = 0;
-            coinValue = 1;
-            upgradeCosts = [500, 2000, 4000, 5000, 8000];
-            currentLevel = 1;
-            updateScore();
-            updateLevel();
-            localStorage.clear();
+    updateScore();
+    updateLevel();
+    upgrades.forEach((upgrade, index) => {
+        upgrade.innerHTML = `<img src="${upgradeImages[index]}" alt="Upgrade ${upgradeValues[index]} Image" style="width:50px;height:50px;"> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+    });
+    updateAchievements(); 
+}
+
+const resetButton = document.getElementById('resetButton');
+resetButton.addEventListener('click', () => {
+    score = 0;
+    coinValue = 1;
+    upgradeCosts = [500, 2000, 4000, 5000, 8000];
+    currentLevel = 1;
+    updateScore();
+    updateLevel();
+    updateAchievements(); 
+    localStorage.clear();
+});
+
+loadScore();
+
+// Навигация
+const navButtons = document.querySelectorAll('.nav-button');
+navButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const targetId = event.target.getAttribute('href').substring(1);
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
         });
+        document.getElementById(targetId).classList.add('active');
+    });
+});
 
-        loadScore();
-
-        // Navigation
-        const navButtons = document.querySelectorAll('.nav-button');
-        navButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetId = event.target.getAttribute('href').substring(1);
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('active');
-                });
-                document.getElementById(targetId).classList.add('active');
-            });
-        });
-
-        function showCoinEffect(value) {
-            const effect = document.createElement('div');
-            effect.className = 'coin-effect';
-            effect.textContent = `+${value}`;
-            coin.appendChild(effect);
-            setTimeout(() => {
-                coin.removeChild(effect);
-            }, 1000);
-        }
+function showCoinEffect(value) {
+    const effect = document.createElement('div');
+    effect.className = 'coin-effect';
+    effect.textContent = `+${value}`;
+    coin.appendChild(effect);
+    setTimeout(() => {
+        coin.removeChild(effect);
+    }, 1000);
+}
     </script>
 </body>
 </html>
