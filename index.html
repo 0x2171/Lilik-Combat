@@ -7,7 +7,7 @@
     <title>Lilik Combat</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
             text-align: center;
             background: linear-gradient(135deg, #f0f0f0, #c0c0c0);
             margin: 0;
@@ -80,12 +80,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 16px;
+            font-size: 18px;
             color: #a52a2a;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px 20px;
             border-radius: 5px;
-            max-width: 150px;
+            max-width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: textShadow 2s infinite;
         }
@@ -347,7 +347,7 @@
         let upgradeCosts = [500, 2000, 4000, 5000, 8000];
         let coinValue = 1;
         let currentLevel = 1;
-        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000]; // Define levels
+        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
 
         const scoreDisplay = document.getElementById('score');
         const upgScoreDisplay = document.getElementById('upgscore');
