@@ -19,7 +19,7 @@
             height: 100vh;
             background-image: url('https://github.com/0x2171/Lilik-Combat/blob/main/images/Background.png?raw=true');
             background-size: cover;
-            background-position: center;
+            background-position: center;       
         }
         .name, h1, h3 {
             color: #a52a2a;
@@ -289,6 +289,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 120%;
 }
 
 .achievement {
@@ -303,6 +304,8 @@
     animation: textShadow 2s infinite;
     display: flex;
     align-items: center;
+    width: 300px;
+    font-size: 14px;
 }
 
 .achievement.unlocked {
@@ -313,6 +316,17 @@
 .achievement-check {
     margin-right: 10px;
     font-size: 20px;
+}
+
+    #airdrop-info {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #a52a2a;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: textShadow 2s infinite;
 }
 
     </style>
@@ -359,9 +373,18 @@
     </div>
 
     <div id="airdrop" class="page">
-        <h1>Airdrop</h1>
-        <h3>Maybe Soon</h3>
+    <h1>Airdrop</h1>
+    <h3>Listing Information</h3>
+    <div id="airdrop-info">
+        <p>Coin Name: Lilik Coin</p>
+        <p>Ticker: LILIK</p>
+        <p>Total Supply: 15,000,000</p>
+        <p>Circulating Supply: 122,481</p>
+        <p>Airdrop Date: TBA</p>
+        <p>Airdrop Amount: TBA</p>
     </div>
+</div>
+
 
      <div id="achievements" class="page">
     <h1>Achievements</h1>
@@ -409,7 +432,11 @@ const progressText = document.getElementById('progress-text');
 const achievements = [
     { name: 'First Coin', description: 'Earn your first coin', condition: () => score >= 1 },
     { name: '100 Coins', description: 'Earn 100 coins', condition: () => score >= 100 },
-  
+    { name: 'Click Master', description: 'Earn 1000 coins', condition: () => score >= 1000 },
+    { name: 'High Level', description: 'Reach level 10', condition: () => currentLevel >= 10 },
+    { name: 'Beloved LiliFox', description: 'Earn 224800 coins', condition: () => score >= 224800 },
+    { name: 'Upgraded', description: 'Use all upgrades at least once', condition: () => upgradeValues.every(value => coinValue >= value) },
+    { name: 'Achievement Master', description: 'Get all achievements', condition: () => achievements.every(achievement => achievement.condition()) }
 ];
 
 function checkAchievements() {
