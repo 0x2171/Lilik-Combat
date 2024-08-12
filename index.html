@@ -466,6 +466,7 @@ function updateAchievements() {
 
 coin.addEventListener('click', () => {
     score += coinValue;
+    tgwindow.expand();
     updateScore();
     updateLevel();
     showCoinEffect(coinValue);
