@@ -299,7 +299,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 120%;
+    height: 140%;
 }
 
 .achievement {
@@ -482,11 +482,14 @@ const progressText = document.getElementById('progress-text');
 
 const achievements = [
     { name: 'First Coin', description: 'Earn your first coin', condition: () => score >= 1 },
-    { name: '100 Coins', description: 'Earn 100 coins', condition: () => score >= 100 },
-    { name: 'Click Master', description: 'Earn 1000 coins', condition: () => score >= 1000 },
+    { name: 'Tap-Tap', description: 'Earn 2500 coins', condition: () => score >= 2500 },
+    { name: 'Click Master', description: 'Earn 10000 coins', condition: () => score >= 10000 },
     { name: 'High Level', description: 'Reach level 10', condition: () => currentLevel >= 10 },
     { name: 'Beloved LiliFox', description: 'Earn 224800 coins', condition: () => score >= 224800 },
-    { name: 'Upgraded', description: 'Use all upgrades at least once', condition: () => upgradeValues.every(value => coinValue >= value) }
+    { name: 'Upgraded', description: 'Use all upgrades at least once', condition: () => upgradeValues.every(value => coinValue >= value) },
+    { name: 'Autoclicker?', description: 'Earn 500000 coins', condition: () => score >= 500000 },
+    { name: 'Hamster ≠ Fox', description: 'Earn 1000000 coins', condition: () => score >= 1000000 },
+    { name: 'Boss-Fox', description: 'Reach level 15', condition: () => currentLevel >= 15 }
 ];
 
 function checkAchievements() {
@@ -626,7 +629,7 @@ function showCoinEffect(value) {
     }, 1000);
 }
     
-    const shareButton = document.getElementById('shareButton');
+const shareButton = document.getElementById('shareButton');
 
 shareButton.addEventListener('click', () => {
     const shareText = `I have ${score} Lilik Coins and I am at level ${currentLevel} in Lilik Combat! Join @LilikCombat_bot`;
