@@ -629,8 +629,8 @@ function showCoinEffect(value) {
     const shareButton = document.getElementById('shareButton');
 
 shareButton.addEventListener('click', () => {
-    const shareText = `I have ${score} Lilik Coins and I am at level ${currentLevel} in Lilik Combat! @LilikCombat_bot`;
-
+    const shareText = `I have ${score} Lilik Coins and I am at level ${currentLevel} in Lilik Combat!`;
+    
     if (!navigator.share) {
         const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}`;
         window.open(telegramUrl, '_blank');
