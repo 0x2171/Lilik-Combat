@@ -21,10 +21,20 @@
             background-size: cover;
             background-position: center;       
         }
-        .name, h1, h3 {
+        .name, h1, h3, shareButton {
             color: #a52a2a;
             font-size: 36px;
             margin-bottom: 20px;
+            animation: textShadow 2s infinite;
+        }
+        #shareButton {
+            font-size: 16px;
+            margin-bottom: 2px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #a52a2a;
             animation: textShadow 2s infinite;
         }
         @keyframes textShadow {
@@ -329,6 +339,32 @@
     animation: textShadow 2s infinite;
 }
 
+    #dailyBonus {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    color: #a52a2a;
+    animation: textShadow 2s infinite;
+    cursor: pointer;
+}
+
+#dailyBonus:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+#dailyBonus:active {
+    background-color: #ffa500;
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
     </style>
 </head>
 <body>
@@ -342,7 +378,6 @@
         <a href="#upgrade" class="nav-button">🔧 Upgrade</a>
         <a href="#achievements" class="nav-button">🏆 Achievs</a>
         <a href="#airdrop" class="nav-button">🛸 Airdrop</a>
-        
     </div>
 
     <div id="mine" class="page active">
@@ -358,6 +393,7 @@
             <div id="next-level">2</div>
         </div>
         <div id="resetButton">Reset all progress</div>
+        <div id="dailyBonus">Daily Bonus: Click to claim!</div>
     </div>
 
     <div id="upgrade" class="page">
@@ -385,13 +421,28 @@
     </div>
 </div>
 
-
      <div id="achievements" class="page">
+     <div id="shareButton">Share your progress</div>
     <h1>Achievements</h1>
     <div id="achievement-list"></div>
 </div>
-    
     <script>
+    const dailyBonus = document.getElementById('dailyBonus');
+
+dailyBonus.addEventListener('click', () => {
+    const lastClaim = localStorage.getItem('lastDailyClaim');
+    const today = new Date().toDateString();
+
+    if (lastClaim !== today) {
+        score += 1000;
+        updateScore();
+        localStorage.setItem('lastDailyClaim', today);
+        alert('You claimed your daily bonus of 1000 coins!');
+    } else {
+        alert('You have already claimed your daily bonus today.');
+    }
+});
+    
         const tgwindow = window.Telegram.WebApp;
 tgwindow.isExpanded;
 tgwindow.expand();
@@ -574,6 +625,20 @@ function showCoinEffect(value) {
         coin.removeChild(effect);
     }, 1000);
 }
+    
+    const shareButton = document.getElementById('shareButton');
+
+shareButton.addEventListener('click', () => {
+    const shareText = `I have ${score} Lilik Coins and I am at level ${currentLevel} in Lilik Combat! @LilikCombat_bot`;
+    if (navigator.share) {
+        navigator.share({
+            title: 'Lilik Combat',
+            text: shareText
+        }).catch(error => console.error('Error sharing:', error));
+    } else {
+        alert('Sharing is not supported in this browser.');
+    }
+});
     </script>
 </body>
 </html>
