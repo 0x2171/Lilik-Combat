@@ -19,13 +19,13 @@
             height: 100vh;
             color: #ffffff;
         }
-        .name, h1, h3, shareButton {
+        .name, h1, h3, #shareButton, #dailyBonus {
             color: #ffffff;
             font-size: 36px;
             margin-bottom: 20px;
             animation: textShadow 2s infinite;
         }
-        #shareButton {
+        #shareButton, #dailyBonus {
             position: relative;
             font-size: 16px;
             top: 15px;
@@ -33,8 +33,16 @@
             background-color: rgba(255, 255, 255, 0.2);
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #ffffff;
-            animation: textShadow 2s infinite;
+            cursor: pointer;
+        }
+        #shareButton:hover, #dailyBonus:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #shareButton:active, #dailyBonus:active {
+            background-color: #00ffff;
+            transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         @keyframes textShadow {
             0% { text-shadow: 0 0 5px #00ffff; }
@@ -42,21 +50,20 @@
             100% { text-shadow: 0 0 5px #00ffff; }
         }
         #coin {
-    width: 534px;
-    height: 534px;
-    background-color: transparent;
-    border-radius: 50%;
-    margin: 80px auto;
-    transform: scale(1.8);
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    outline: none;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+            width: 534px;
+            height: 534px;
+            background-color: transparent;
+            border-radius: 50%;
+            margin: 80px auto;
+            transform: scale(1.8);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         #coin:active {
             animation: coinPress 0.3s;
         }
@@ -74,7 +81,7 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
         }
-        #score {
+        #score, #upgscore, #nameupg {
             font-size: 28px;
             margin-top: 20px;
             color: #ffffff;
@@ -93,13 +100,7 @@
             flex-direction: column;
             align-items: center;
             font-size: 16px;
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 5px;
             max-width: 150px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: textShadow 2s infinite;
         }
         #nameupg {
             position: fixed;
@@ -109,9 +110,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #ffffff;
             font-size: 26px;
-            animation: textShadow 2s infinite;
         }
         #upgrades {
             max-width: 800px;
@@ -170,6 +169,7 @@
             font-size: 10px;
             color: #ffffff;
             animation: textShadow 2s infinite;
+            cursor: pointer;
         }
         #resetButton:hover {
             transform: scale(1.05);
@@ -180,7 +180,6 @@
             transform: scale(0.95);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
         .nav-buttons {
             position: fixed;
             bottom: 16px;
@@ -197,7 +196,6 @@
             color: #ffffff;
             animation: textShadow 2s infinite;
             text-decoration: none;
-            cursor: none;
         }
         .nav-button:hover {
             transform: scale(1.05);
@@ -281,50 +279,19 @@
             color: white;
             font-size: 12px;
         }
-        #current-level {
+        #current-level, #next-level {
             color: #00ffff;
         }
-    #next-level {
-            color: #00ffff;
+        #airdrop-info {
+            margin-top: 20px;
+            font-size: 15px;
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 2px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: textShadow 2s infinite;
         }
-
-    #airdrop-info {
-    margin-top: 20px;
-    font-size: 15px;
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 2px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: textShadow 2s infinite;
-}
-
-    #dailyBonus {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-size: 16px;
-    color: #ffffff;
-    animation: textShadow 2s infinite;
-    cursor: pointer;
-}
-
-#dailyBonus:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-#dailyBonus:active {
-    background-color: #00ffff;
-    transform: scale(0.95);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
     </style>
 </head>
 <body>
@@ -370,197 +337,189 @@
     </div>
 
     <div id="airdrop" class="page">
-    <h1>Moondrop</h1>
-    <h3>Listing Information</h3>
-    <div id="airdrop-info">
-        <p>Coin Name: Lilik Spark</p>
-        <p>Ticker: LILIK</p>
-        <p>Total Supply: 15,000,000</p>
-        <p>Circulating Supply: 532,113</p>
-        <p>Moondrop Date: TBA</p>
-        <p>Moondrop Amount: TBA</p>
-    </div>
+        <h1>Moondrop</h1>
+        <h3>Listing Information</h3>
+        <div id="airdrop-info">
+            <p>Coin Name: Lilik Spark</p>
+            <p>Ticker: LILIK</p>
+            <p>Total Supply: 15,000,000</p>
+            <p>Circulating Supply: 532,113</p>
+            <p>Moondrop Date: TBA</p>
+            <p>Moondrop Amount: TBA</p>
+        </div>
         <div id="shareButton">Share your progress</div>
     </div>
-</div>
+
     <script>
-    const dailyBonus = document.getElementById('dailyBonus');
-
-dailyBonus.addEventListener('click', () => {
-    const lastClaim = localStorage.getItem('lastDailyClaim');
-    const today = new Date().toDateString();
-
-    if (lastClaim !== today) {
-        score += 1000;
-        updateScore();
-        localStorage.setItem('lastDailyClaim', today);
-        alert('You claimed your daily bonus of 1000 sparks!');
-    } else {
-        alert('You have already claimed your daily bonus today.');
-    }
-});
-
         const tgwindow = window.Telegram.WebApp;
-tgwindow.isExpanded;
-tgwindow.expand();
+        tgwindow.isExpanded;
+        tgwindow.expand();
 
-const MIN_LOADING_TIME = 1500;
-window.addEventListener('load', () => {
-    const loadingScreen = document.getElementById('loading-screen');
-    setTimeout(() => {
-        loadingScreen.style.display = 'none';
-    }, MIN_LOADING_TIME);
-});
-
-let score = 0;
-let upgradeCosts = [500, 2000, 4000, 5000, 8000];
-let coinValue = 1;
-let currentLevel = 1;
-const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
-
-const scoreDisplay = document.getElementById('score');
-const upgScoreDisplay = document.getElementById('upgscore');
-const coin = document.getElementById('coin');
-const upgrades = document.querySelectorAll('.upgrade');
-const upgradeValues = [1, 2, 5, 8, 10];
-const upgradeMultipliers = [2, 3, 3, 5, 6];
-const upgradeImages = [
-    '🚀',
-    '🛸',
-    '🌌',
-    '🌠',
-    '🌟'
-];
-
-const currentLevelDisplay = document.getElementById('current-level');
-const nextLevelDisplay = document.getElementById('next-level');
-const progressBarFill = document.getElementById('progress-bar-fill');
-const progressText = document.getElementById('progress-text');
-
-
-coin.addEventListener('click', () => {
-    score += coinValue;
-    tgwindow.expand();
-    updateScore();
-    updateLevel();
-    showCoinEffect(coinValue);
-});
-
-upgrades.forEach((upgrade, index) => {
-    upgrade.addEventListener('click', () => {
-        if (score >= upgradeCosts[index]) {
-            score -= upgradeCosts[index];
-            coinValue += upgradeValues[index];
-            upgradeCosts[index] *= upgradeMultipliers[index];
-            updateScore();
-            upgrade.innerHTML = `<span style="font-size: 50px;">${upgradeImages[index]}</span> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
-        }
-    });
-});
-
-function updateScore() {
-    scoreDisplay.textContent = `Sparks: ${score}`;
-    upgScoreDisplay.textContent = `Sparks: ${score}`;
-    localStorage.setItem('lilikScore', score);
-    localStorage.setItem('lilikCoinValue', coinValue);
-    upgradeCosts.forEach((cost, index) => {
-        localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
-    });
-}
-
-function updateLevel() {
-    for (let i = 0; i < levels.length; i++) {
-        if (score < levels[i]) {
-            currentLevel = i + 1;
-            break;
-        }
-    }
-    currentLevelDisplay.textContent = currentLevel;
-    nextLevelDisplay.textContent = currentLevel + 1;
-    const progress = (score - (levels[currentLevel - 2] || 0)) / (levels[currentLevel - 1] - (levels[currentLevel - 2] || 0)) * 100;
-    progressBarFill.style.width = `${progress}%`;
-    progressText.textContent = `${Math.round(progress)}%`;
-}
-
-function loadScore() {
-    const savedScore = localStorage.getItem('lilikScore');
-    const savedCoinValue = localStorage.getItem('lilikCoinValue');
-    const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
-
-    if (savedScore !== null) {
-        score = parseInt(savedScore, 10);
-    }
-    if (savedCoinValue !== null) {
-        coinValue = parseInt(savedCoinValue, 10);
-    }
-    if (savedCurrentLevel !== null) {
-        currentLevel = parseInt(savedCurrentLevel, 10);
-    }
-    upgradeCosts.forEach((cost, index) => {
-        const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
-        if (savedCost !== null) {
-            upgradeCosts[index] = parseInt(savedCost, 10);
-        }
-    });
-
-    updateScore();
-    updateLevel();
-    upgrades.forEach((upgrade, index) => {
-        upgrade.innerHTML = `<span style="font-size: 50px;">${upgradeImages[index]}</span> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
-    });
-}
-
-const resetButton = document.getElementById('resetButton');
-resetButton.addEventListener('click', () => {
-    score = 0;
-    coinValue = 1;
-    upgradeCosts = [500, 2000, 4000, 5000, 8000];
-    currentLevel = 1;
-    updateScore();
-    updateLevel();
-    localStorage.clear();
-});
-
-loadScore();
-
-// Навигация
-const navButtons = document.querySelectorAll('.nav-button');
-navButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        event.preventDefault();
-        const targetId = event.target.getAttribute('href').substring(1);
-        document.querySelectorAll('.page').forEach(page => {
-            page.classList.remove('active');
+        const MIN_LOADING_TIME = 1500;
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, MIN_LOADING_TIME);
         });
-        document.getElementById(targetId).classList.add('active');
-    });
-});
 
-function showCoinEffect(value) {
-    const effect = document.createElement('div');
-    effect.className = 'coin-effect';
-    effect.textContent = `+${value}`;
-    coin.appendChild(effect);
-    setTimeout(() => {
-        coin.removeChild(effect);
-    }, 1000);
-}
+        let score = 0;
+        let upgradeCosts = [500, 2000, 4000, 5000, 8000];
+        let coinValue = 1;
+        let currentLevel = 1;
+        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
 
-const shareButton = document.getElementById('shareButton');
+        const scoreDisplay = document.getElementById('score');
+        const upgScoreDisplay = document.getElementById('upgscore');
+        const coin = document.getElementById('coin');
+        const upgrades = document.querySelectorAll('.upgrade');
+        const upgradeValues = [1, 2, 5, 8, 10];
+        const upgradeMultipliers = [2, 3, 3, 5, 6];
+        const upgradeImages = ['🚀', '🛸', '🌌', '🌠', '🌟'];
 
-shareButton.addEventListener('click', () => {
-    const shareText = `I have ${score} Lilik Sparks and I am at level ${currentLevel} in Lilik Combat! Join @LilikCombat_bot`;
+        const currentLevelDisplay = document.getElementById('current-level');
+        const nextLevelDisplay = document.getElementById('next-level');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        const progressText = document.getElementById('progress-text');
 
-    if (!navigator.share) {
-        const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareText)}`;
-        window.open(telegramUrl, '_blank');
-    } else {
-        navigator.share({
-            title: 'Lilik Combat',
-            text: shareText
-        }).catch(error => console.error('Error sharing:', error));
-    }
-});
+        const dailyBonus = document.getElementById('dailyBonus');
+        const resetButton = document.getElementById('resetButton');
+        const shareButton = document.getElementById('shareButton');
+
+        coin.addEventListener('click', () => {
+            score += coinValue;
+            tgwindow.expand();
+            updateScore();
+            updateLevel();
+            showCoinEffect(coinValue);
+        });
+
+        upgrades.forEach((upgrade, index) => {
+            upgrade.addEventListener('click', () => {
+                if (score >= upgradeCosts[index]) {
+                    score -= upgradeCosts[index];
+                    coinValue += upgradeValues[index];
+                    upgradeCosts[index] *= upgradeMultipliers[index];
+                    updateScore();
+                    upgrade.innerHTML = `<span style="font-size: 50px;">${upgradeImages[index]}</span> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+                }
+            });
+        });
+
+        function updateScore() {
+            scoreDisplay.textContent = `Sparks: ${score}`;
+            upgScoreDisplay.textContent = `Sparks: ${score}`;
+            localStorage.setItem('lilikScore', score);
+            localStorage.setItem('lilikCoinValue', coinValue);
+            upgradeCosts.forEach((cost, index) => {
+                localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
+            });
+        }
+
+        function updateLevel() {
+            for (let i = 0; i < levels.length; i++) {
+                if (score < levels[i]) {
+                    currentLevel = i + 1;
+                    break;
+                }
+            }
+            currentLevelDisplay.textContent = currentLevel;
+            nextLevelDisplay.textContent = currentLevel + 1;
+            const progress = (score - (levels[currentLevel - 2] || 0)) / (levels[currentLevel - 1] - (levels[currentLevel - 2] || 0)) * 100;
+            progressBarFill.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
+        }
+
+        function loadScore() {
+            const savedScore = localStorage.getItem('lilikScore');
+            const savedCoinValue = localStorage.getItem('lilikCoinValue');
+            const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
+
+            if (savedScore !== null) {
+                score = parseInt(savedScore, 10);
+            }
+            if (savedCoinValue !== null) {
+                coinValue = parseInt(savedCoinValue, 10);
+            }
+            if (savedCurrentLevel !== null) {
+                currentLevel = parseInt(savedCurrentLevel, 10);
+            }
+            upgradeCosts.forEach((cost, index) => {
+                const savedCost = localStorage.getItem(`lilikUpgrade${upgradeValues[index]}Cost`);
+                if (savedCost !== null) {
+                    upgradeCosts[index] = parseInt(savedCost, 10);
+                }
+            });
+
+            updateScore();
+            updateLevel();
+            upgrades.forEach((upgrade, index) => {
+                upgrade.innerHTML = `<span style="font-size: 50px;">${upgradeImages[index]}</span> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
+            });
+        }
+
+        resetButton.addEventListener('click', () => {
+            score = 0;
+            coinValue = 1;
+            upgradeCosts = [500, 2000, 4000, 5000, 8000];
+            currentLevel = 1;
+            updateScore();
+            updateLevel();
+            localStorage.clear();
+        });
+
+        dailyBonus.addEventListener('click', () => {
+            const lastClaim = localStorage.getItem('lastDailyClaim');
+            const today = new Date().toDateString();
+
+            if (lastClaim !== today) {
+                score += 1000;
+                updateScore();
+                localStorage.setItem('lastDailyClaim', today);
+                alert('You claimed your daily bonus of 1000 sparks!');
+            } else {
+                alert('You have already claimed your daily bonus today.');
+            }
+        });
+
+        // Навигация
+        const navButtons = document.querySelectorAll('.nav-button');
+        navButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = event.target.getAttribute('href').substring(1);
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        function showCoinEffect(value) {
+            const effect = document.createElement('div');
+            effect.className = 'coin-effect';
+            effect.textContent = `+${value}`;
+            coin.appendChild(effect);
+            setTimeout(() => {
+                coin.removeChild(effect);
+            }, 1000);
+        }
+
+        shareButton.addEventListener('click', () => {
+            const shareText = `I have ${score} Lilik Sparks and I am at level ${currentLevel} in Lilik Combat! Join @LilikCombat_bot`;
+
+            if (!navigator.share) {
+                const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareText)}`;
+                window.open(telegramUrl, '_blank');
+            } else {
+                navigator.share({
+                    title: 'Lilik Combat',
+                    text: shareText
+                }).catch(error => console.error('Error sharing:', error));
+            }
+        });
+
+        loadScore();
     </script>
 </body>
 </html>
