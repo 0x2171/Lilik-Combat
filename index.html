@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <title>Lilik Combat</title>
+    <title>Lilik Enchantment</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -288,39 +288,6 @@
             color: #00ffff;
         }
 
-    #achievement-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-}
-
-.achievement {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    animation: textShadow 2s infinite;
-    display: flex;
-    align-items: center;
-    width: 300px;
-    font-size: 14px;
-}
-
-.achievement.unlocked {
-    background-color: #00ffff;
-    color: white;
-}
-
-.achievement-check {
-    margin-right: 10px;
-    font-size: 20px;
-}
-
     #airdrop-info {
     margin-top: 20px;
     font-size: 15px;
@@ -367,14 +334,13 @@
     </div>
     <div id="nav-place"></div>
     <div class="nav-buttons">
-        <a href="#mine" class="nav-button">🏠 Mine</a>
-        <a href="#upgrade" class="nav-button">🔧 Upgrade</a>
-        <a href="#achievements" class="nav-button">🏆 Achievs</a>
-        <a href="#airdrop" class="nav-button">🛸 Airdrop</a>
+        <a href="#mine" class="nav-button">💠 Enchanting</a>
+        <a href="#upgrade" class="nav-button">🌀 Upgrade</a>
+        <a href="#airdrop" class="nav-button">🌙 Moondrop</a>
     </div>
 
     <div id="mine" class="page active">
-        <div class="name">Lilik Combat</div>
+        <div class="name">Lilik Enchantment</div>
         <div id="coin">
             <img src="https://raw.githubusercontent.com/0x2171/Lilik-Combat/refs/heads/main/images/u2b50_u1f48e.png" alt="Coin" style="width: 100%; height: 100%;">
         </div>
@@ -404,22 +370,18 @@
     </div>
 
     <div id="airdrop" class="page">
-    <h1>Airdrop</h1>
+    <h1>Moondrop</h1>
     <h3>Listing Information</h3>
     <div id="airdrop-info">
         <p>Coin Name: Lilik Spark</p>
         <p>Ticker: LILIK</p>
         <p>Total Supply: 15,000,000</p>
         <p>Circulating Supply: 532,113</p>
-        <p>Airdrop Date: TBA</p>
-        <p>Airdrop Amount: TBA</p>
+        <p>Moondrop Date: TBA</p>
+        <p>Moondrop Amount: TBA</p>
     </div>
-</div>
-
-     <div id="achievements" class="page">
-     <div id="shareButton">Share your progress</div>
-    <h1>Achievements</h1>
-    <div id="achievement-list"></div>
+        <div id="shareButton">Share your progress</div>
+    </div>
 </div>
     <script>
     const dailyBonus = document.getElementById('dailyBonus');
@@ -475,43 +437,6 @@ const nextLevelDisplay = document.getElementById('next-level');
 const progressBarFill = document.getElementById('progress-bar-fill');
 const progressText = document.getElementById('progress-text');
 
-const achievements = [
-    { name: 'First Spark', description: 'Earn your first spark', condition: () => score >= 1 },
-    { name: 'Tap-Tap', description: 'Earn 2500 sparks', condition: () => score >= 2500 },
-    { name: 'Click Master', description: 'Earn 10000 sparks', condition: () => score >= 10000 },
-    { name: 'High Level', description: 'Reach level 10', condition: () => currentLevel >= 10 },
-    { name: 'Beloved LiliFox', description: 'Earn 224800 sparks', condition: () => score >= 224800 },
-    { name: 'Upgraded', description: 'Use all upgrades at least once', condition: () => upgradeValues.every(value => coinValue >= value) },
-    { name: 'Autoclicker?', description: 'Earn 500000 sparks', condition: () => score >= 500000 },
-    { name: 'Hamster ≠ Fox', description: 'Earn 1000000 sparks', condition: () => score >= 1000000 },
-    { name: 'Boss-Fox', description: 'Reach level 15', condition: () => currentLevel >= 15 }
-];
-
-function checkAchievements() {
-    achievements.forEach((achievement, index) => {
-        const achievementItem = document.getElementById(`achievement-${index}`);
-        if (achievement.condition()) {
-            achievementItem.classList.add('unlocked');
-            achievementItem.querySelector('.achievement-check').textContent = '✅';
-        }
-    });
-}
-
-function updateAchievements() {
-    const achievementList = document.getElementById('achievement-list');
-    achievementList.innerHTML = '';
-    achievements.forEach((achievement, index) => {
-        const achievementItem = document.createElement('div');
-        achievementItem.id = `achievement-${index}`;
-        achievementItem.className = 'achievement';
-        achievementItem.innerHTML = `
-            <span class="achievement-check">❌</span>
-            <span>${achievement.name}: ${achievement.description}</span>
-        `;
-        achievementList.appendChild(achievementItem);
-    });
-    checkAchievements();
-}
 
 coin.addEventListener('click', () => {
     score += coinValue;
@@ -519,7 +444,6 @@ coin.addEventListener('click', () => {
     updateScore();
     updateLevel();
     showCoinEffect(coinValue);
-    checkAchievements();
 });
 
 upgrades.forEach((upgrade, index) => {
@@ -584,7 +508,6 @@ function loadScore() {
     upgrades.forEach((upgrade, index) => {
         upgrade.innerHTML = `<span style="font-size: 50px;">${upgradeImages[index]}</span> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
     });
-    updateAchievements();
 }
 
 const resetButton = document.getElementById('resetButton');
@@ -595,7 +518,6 @@ resetButton.addEventListener('click', () => {
     currentLevel = 1;
     updateScore();
     updateLevel();
-    updateAchievements();
     localStorage.clear();
 });
 
