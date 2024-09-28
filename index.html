@@ -9,7 +9,7 @@
         body {
             font-family: 'Roboto', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #000000, #191970);
+            background: radial-gradient(circle at center, #000000, #191970);
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,6 +18,28 @@
             justify-content: center;
             height: 100vh;
             color: #ffffff;
+            overflow: hidden;
+            position: relative;
+        }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         .name, h1, h3, #shareButton, #dailyBonus {
             color: #ffffff;
@@ -182,12 +204,12 @@
         }
         .nav-buttons {
             position: fixed;
-            bottom: 16px;
+            bottom: 2%;
             display: flex;
             gap: 1px;
         }
         .nav-button {
-            padding: 1px 20px;
+            padding: 4px 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.2);
@@ -196,14 +218,14 @@
             color: #ffffff;
             animation: textShadow 2s infinite;
             text-decoration: none;
+            flex: 1;
+            text-align: center;
         }
         .nav-button:hover {
-            transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
         .nav-button:active {
             background-color: #00ffff;
-            transform: scale(0.95);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .page {
@@ -224,9 +246,8 @@
             justify-content: center;
             align-items: center;
             z-index: 999;
-            overflow: hidden; /* Add this line to hide the content below the loading screen */
+            overflow: hidden;
         }
-
         #loading-spinner {
             border: 16px solid #f3f3f3;
             border-top: 16px solid #00ffff;
@@ -236,18 +257,16 @@
             animation: spin 2s linear infinite;
             margin-bottom: 20px;
         }
-         @keyframes spin {
+        @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         #loading-text {
             font-size: 24px;
             color: #ffffff;
             margin-bottom: 10px;
             animation: textShadow 2s infinite;
         }
-
         #loading-progress {
             width: 200px;
             height: 20px;
@@ -257,14 +276,13 @@
             position: relative;
             overflow: hidden;
         }
-    #loading-progress-bar {
+        #loading-progress-bar {
             height: 100%;
             background-color: #00ffff;
             border-radius: 5px;
             transition: width 0.3s;
             width: 0;
         }
-
         #loading-progress-text {
             position: absolute;
             top: 50%;
@@ -273,41 +291,7 @@
             color: white;
             font-size: 12px;
         }
-    #loading-screen::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-            z-index: -1;
-            animation: loadingBackground 2s infinite;
-        }
-
-        @keyframes loadingBackground {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
-    #loading-spinner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #00ffff;
-            border-radius: 50%;
-            opacity: 0;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-         .coin-effect {
+        .coin-effect {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -325,9 +309,9 @@
         #progress-container {
             display: flex;
             align-items: center;
-            justify-content: center; /* Добавьте это для центрирования по горизонтали */
+            justify-content: center;
             margin-top: 20px;
-            width: 100%; /* Убедитесь, что контейнер занимает всю ширину */
+            width: 100%;
         }
         #progress-bar {
             width: 200px;
@@ -336,7 +320,7 @@
             border-radius: 5px;
             margin: 0 10px;
             position: relative;
-            padding: 0; /* Убедитесь, что нет лишних полей */
+            padding: 0;
         }
         #progress-bar-fill {
             height: 100%;
@@ -374,13 +358,20 @@
             height: 100%;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, rgba(0,255,255,0) 100%);
+            animation: changeColor 10s infinite;
             opacity: 0;
             pointer-events: none;
             transition: opacity 1s ease-in-out;
         }
+        @keyframes changeColor {
+            0% { background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, rgba(0,255,255,0) 100%); }
+            50% { background: radial-gradient(circle, rgba(0,191,255,0.6) 0%, rgba(0,191,255,0) 100%); }
+            100% { background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, rgba(0,255,255,0) 100%); }
+        }
     </style>
 </head>
 <body>
+    <div class="stars"></div>
     <div id="loading-screen">
         <div id="loading-spinner"></div>
         <div id="loading-text">Loading</div>
@@ -395,11 +386,10 @@
         <a href="#upgrade" class="nav-button">🌀 Upgrade</a>
         <a href="#airdrop" class="nav-button">🌙 Moondrop</a>
     </div>
-
     <div id="mine" class="page active">
         <div class="name">Lilik Enchantment</div>
         <div id="coin">
-            <img src="https://raw.githubusercontent.com/0x2171/Lilik-Combat/refs/heads/main/images/u2b50_u1f48e.png" alt="Coin" style="width: 100%; height: 100%;">
+            <img src="https://raw.githubusercontent.com/0x2171/Lilik-Combat/refs/heads/main/images/u2b50_u1f48e.png" alt="Coin" style="width: 90%; height: 90%;">
         </div>
         <div id="score">Sparks: 0</div>
         <div id="progress-container">
@@ -413,7 +403,6 @@
         <div id="resetButton">Reset all progress</div>
         <div id="dailyBonus">Daily Bonus: Click to claim!</div>
     </div>
-
     <div id="upgrade" class="page">
         <div id="upgscore">Sparks: 0</div>
         <div id="upgrades">
@@ -423,7 +412,6 @@
             <div class="upgrade" id="upgrade4"></div>
         </div>
     </div>
-
     <div id="airdrop" class="page">
         <h1>Moondrop</h1>
         <h3>Listing Information</h3>
@@ -437,34 +425,27 @@
         </div>
         <div id="shareButton">Share your progress</div>
     </div>
-
     <script>
         const tgwindow = window.Telegram.WebApp;
         tgwindow.isExpanded;
         tgwindow.expand();
-
-    const loadingProgressBar = document.getElementById('loading-progress-bar');
+        const loadingProgressBar = document.getElementById('loading-progress-bar');
         const loadingProgressText = document.getElementById('loading-progress-text');
-
         let loadingProgress = 0;
-
         const loadingInterval = setInterval(() => {
             loadingProgress += 6;
             loadingProgressBar.style.width = `${loadingProgress}%`;
             loadingProgressText.textContent = `${loadingProgress}%`;
-
             if (loadingProgress >= 100) {
                 clearInterval(loadingInterval);
                 document.getElementById('loading-screen').style.display = 'none';
             }
         }, 100);
-    
         let score = 0;
         let upgradeCosts = [500, 2000, 4000, 5000];
         let coinValue = 1;
         let currentLevel = 1;
         const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
-
         const scoreDisplay = document.getElementById('score');
         const upgScoreDisplay = document.getElementById('upgscore');
         const coin = document.getElementById('coin');
@@ -472,28 +453,27 @@
         const upgradeValues = [1, 2, 5, 8];
         const upgradeMultipliers = [2, 3, 3, 5];
         const upgradeImages = ['🚀', '🛸', '🌌', '🌠'];
-
         const currentLevelDisplay = document.getElementById('current-level');
         const nextLevelDisplay = document.getElementById('next-level');
         const progressBarFill = document.getElementById('progress-bar-fill');
         const progressText = document.getElementById('progress-text');
-
         const dailyBonus = document.getElementById('dailyBonus');
         const resetButton = document.getElementById('resetButton');
         const shareButton = document.getElementById('shareButton');
-
         let lightIntensity = 0;
         const maxLightIntensity = 1;
-        const fadeInterval = 300; // Интервал утихания света в миллисекундах
-
+        const fadeInterval = 300;
         const lightEffect = document.createElement('div');
         lightEffect.id = 'light-effect';
         coin.appendChild(lightEffect);
-
         function updateLightEffect() {
             lightEffect.style.opacity = lightIntensity;
+            lightEffect.style.background = `radial-gradient(circle, rgba(0,${getColorComponent()},${getColorComponent()},0.6) 0%, rgba(0,${getColorComponent()},${getColorComponent()},0) 100%)`;
         }
-
+        function getColorComponent() {
+            const hue = Math.floor(lightIntensity * 255);
+            return hue < 128 ? hue * 2 : 255 - (hue - 128) * 2;
+        }
         function fadeLightEffect() {
             if (lightIntensity > 0) {
                 lightIntensity -= 0.1;
@@ -503,14 +483,11 @@
                 updateLightEffect();
             }
         }
-
         coin.addEventListener('click', () => {
             score += coinValue;
-            tgwindow.expand();
             updateScore();
             updateLevel();
             showCoinEffect(coinValue);
-
             if (lightIntensity < maxLightIntensity) {
                 lightIntensity += 0.1;
                 if (lightIntensity > maxLightIntensity) {
@@ -518,13 +495,10 @@
                 }
                 updateLightEffect();
             }
-
             clearInterval(fadeIntervalId);
             fadeIntervalId = setInterval(fadeLightEffect, fadeInterval);
         });
-
         let fadeIntervalId = setInterval(fadeLightEffect, fadeInterval);
-
         upgrades.forEach((upgrade, index) => {
             upgrade.addEventListener('click', () => {
                 if (score >= upgradeCosts[index]) {
@@ -536,7 +510,6 @@
                 }
             });
         });
-
         function updateScore() {
             scoreDisplay.textContent = `Sparks: ${score}`;
             upgScoreDisplay.textContent = `Sparks: ${score}`;
@@ -546,7 +519,6 @@
                 localStorage.setItem(`lilikUpgrade${upgradeValues[index]}Cost`, cost);
             });
         }
-
         function updateLevel() {
             for (let i = 0; i < levels.length; i++) {
                 if (score < levels[i]) {
@@ -560,12 +532,10 @@
             progressBarFill.style.width = `${progress}%`;
             progressText.textContent = `${Math.round(progress)}%`;
         }
-
         function loadScore() {
             const savedScore = localStorage.getItem('lilikScore');
             const savedCoinValue = localStorage.getItem('lilikCoinValue');
             const savedCurrentLevel = localStorage.getItem('lilikCurrentLevel');
-
             if (savedScore !== null) {
                 score = parseInt(savedScore, 10);
             }
@@ -581,14 +551,12 @@
                     upgradeCosts[index] = parseInt(savedCost, 10);
                 }
             });
-
             updateScore();
             updateLevel();
             upgrades.forEach((upgrade, index) => {
                 upgrade.innerHTML = `<span style="font-size: 50px;">${upgradeImages[index]}</span> Coins +${upgradeValues[index]} (Cost: ${upgradeCosts[index]})`;
             });
         }
-
         resetButton.addEventListener('click', () => {
             score = 0;
             coinValue = 1;
@@ -598,11 +566,9 @@
             updateLevel();
             localStorage.clear();
         });
-
         dailyBonus.addEventListener('click', () => {
             const lastClaim = localStorage.getItem('lastDailyClaim');
             const today = new Date().toDateString();
-
             if (lastClaim !== today) {
                 score += 1000;
                 updateScore();
@@ -612,8 +578,6 @@
                 alert('You have already claimed your daily bonus today 💠');
             }
         });
-
-        // Навигация
         const navButtons = document.querySelectorAll('.nav-button');
         navButtons.forEach(button => {
             button.addEventListener('click', (event) => {
@@ -625,7 +589,6 @@
                 document.getElementById(targetId).classList.add('active');
             });
         });
-
         function showCoinEffect(value) {
             const effect = document.createElement('div');
             effect.className = 'coin-effect';
@@ -635,20 +598,29 @@
                 coin.removeChild(effect);
             }, 1000);
         }
-
         shareButton.addEventListener('click', () => {
-            const shareText = `I have ${score} Lilik Sparks and I am at level ${currentLevel} in Lilik Combat! Join @LilikCombat_bot`;
-
+            const shareText = `I have ${score} Lilik Sparks and I am at level ${currentLevel} in Lilik Enchantment! Join @LilikEnchant_bot`;
             if (!navigator.share) {
                 const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareText)}`;
                 window.open(telegramUrl, '_blank');
             } else {
                 navigator.share({
-                    title: 'Lilik Combat',
+                    title: 'Lilik Enchantment',
                     text: shareText
                 }).catch(error => console.error('Error sharing:', error));
             }
         });
+        const starsContainer = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.width = `${Math.random() * 2 + 1}px`;
+            star.style.height = `${Math.random() * 2 + 1}px`;
+            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            starsContainer.appendChild(star);
+        }
         loadScore();
     </script>
 </body>
