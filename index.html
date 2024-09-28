@@ -566,14 +566,27 @@
             updateLevel();
             localStorage.clear();
         });
+        function checkDailyBonus() {
+            const lastClaim = localStorage.getItem('lastDailyClaim');
+            const today = new Date().toDateString();
+            if (lastClaim !== today) {
+                dailyBonus.style.display = 'block';
+            } else {
+                dailyBonus.style.display = 'none';
+            }
+        }
         dailyBonus.addEventListener('click', () => {
             const lastClaim = localStorage.getItem('lastDailyClaim');
             const today = new Date().toDateString();
             if (lastClaim !== today) {
-                score += 1000;
+                const lastBonusAmount = parseInt(localStorage.getItem('lastBonusAmount') || '1000', 10);
+                const newBonusAmount = lastBonusAmount + 1000;
+                score += newBonusAmount;
                 updateScore();
                 localStorage.setItem('lastDailyClaim', today);
-                alert('You claimed your daily bonus of 1000 sparks 💠');
+                localStorage.setItem('lastBonusAmount', newBonusAmount);
+                alert(`You claimed your daily bonus of ${newBonusAmount} sparks 💠`);
+                dailyBonus.style.display = 'none';
             } else {
                 alert('You have already claimed your daily bonus today 💠');
             }
@@ -622,6 +635,7 @@
             starsContainer.appendChild(star);
         }
         loadScore();
+        checkDailyBonus();
     </script>
 </body>
 </html>
