@@ -300,6 +300,14 @@
 		  color: white;
 		  font-size: 12px;
 		}
+    #loading-progress-message {
+        position: fixed;
+		  top: 80%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  color: white;
+		  font-size: 14px;
+    }
         .coin-effect {
             position: absolute;
             top: 50%;
@@ -388,6 +396,7 @@
             <div id="loading-progress-bar"></div>
             <div id="loading-progress-text">0%</div>
         </div>
+        <div id="loading-progress-message">Зачаруй все кристаллы Лилика!</div>
     </div>
     <div id="nav-place"></div>
     <div class="nav-buttons">
@@ -435,7 +444,6 @@
         <div id="shareButton">Share your progress</div>
     </div>
     <script>
-        mine.style.display = 'none';
         const tgwindow = window.Telegram.WebApp;
         tgwindow.isExpanded;
         tgwindow.expand();
@@ -449,20 +457,20 @@
             if (loadingProgress >= 100) {
                 clearInterval(loadingInterval);
                 document.getElementById('loading-screen').style.display = 'none';
-                mine.style.display = 'block';
+        
             }
         }, 100);
         let score = 0;
-        let upgradeCosts = [500, 2000, 4000, 5000];
+        let upgradeCosts = [2248, 5000, 10000, 15000];
         let coinValue = 1;
         let currentLevel = 1;
-        const levels = [100, 300, 500, 800, 1000, 1500, 2500, 5000, 10000, 50000, 100000, 500000, 1000000];
+        const levels = [5000, 15000, 50000, 250000, 500000, 1000000, 5000000, 25000000, 50000000, 125000000, 500000000, 1000000000, 5000000000];
         const scoreDisplay = document.getElementById('score');
         const upgScoreDisplay = document.getElementById('upgscore');
         const coin = document.getElementById('coin');
         const upgrades = document.querySelectorAll('.upgrade');
-        const upgradeValues = [1, 2, 5, 8];
-        const upgradeMultipliers = [2, 3, 3, 5];
+        const upgradeValues = [1, 2, 3, 5];
+        const upgradeMultipliers = [2, 3, 3, 4];
         const upgradeImages = ['🚀', '🛸', '🌌', '🌠'];
         const currentLevelDisplay = document.getElementById('current-level');
         const nextLevelDisplay = document.getElementById('next-level');
@@ -590,7 +598,7 @@
             const lastClaim = localStorage.getItem('lastDailyClaim');
             const today = new Date().toDateString();
             if (lastClaim !== today) {
-                const lastBonusAmount = parseInt(localStorage.getItem('lastBonusAmount') || '1000', 10);
+                const lastBonusAmount = parseInt(localStorage.getItem('lastBonusAmount') || '0', 10);
                 const newBonusAmount = lastBonusAmount + 1000;
                 score += newBonusAmount;
                 updateScore();
