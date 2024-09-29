@@ -435,6 +435,7 @@
         <div id="shareButton">Share your progress</div>
     </div>
     <script>
+        mine.style.display = 'none';
         const tgwindow = window.Telegram.WebApp;
         tgwindow.isExpanded;
         tgwindow.expand();
@@ -448,6 +449,7 @@
             if (loadingProgress >= 100) {
                 clearInterval(loadingInterval);
                 document.getElementById('loading-screen').style.display = 'none';
+                mine.style.display = 'block';
             }
         }, 100);
         let score = 0;
