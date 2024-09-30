@@ -7,42 +7,20 @@
     <title>Lilik Enchantment</title>
     <style>
         body {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    background: radial-gradient(circle at center, #000000, #000033, #000066, #000000);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: #ffffff;
-    overflow: hidden;
-    position: relative;
-}
-
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
-    pointer-events: none;
-}
-
-body::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
-    pointer-events: none;
-}
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            background: radial-gradient(circle at center, #000000, #191970);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
+        }
         .stars {
             position: absolute;
             top: 0;
@@ -233,8 +211,7 @@ body::after {
         .nav-button {
             padding: 4px 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.1);
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             color: #ffffff;
@@ -257,79 +234,79 @@ body::after {
             display: block;
         }
         #loading-screen {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			z-index: 999;
-			overflow: hidden;
-			background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Enchantment/refs/heads/main/images/AppArt.png'),
-							  linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
-			background-size: cover;
-			background-position: center;
-			background-blend-mode: multiply;
-		}
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            overflow: hidden;
+            background-image: url('https://raw.githubusercontent.com/0x2171/Lilik-Enchantment/refs/heads/main/images/AppArt.png'),
+                              linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+        }
         #loading-spinner {
-		  border: 16px solid #e6f2ff; 
-		  border-top: 16px solid #00bfff;
-		  border-radius: 50%;
-		  width: 120px;
-		  height: 120px;
-		  animation: spin 2s linear infinite;
-		  margin-bottom: 20px;
-		}
-		@keyframes spin {
-		  0% { transform: rotate(0deg); }
-		  100% { transform: rotate(360deg); }
-		}
-		#loading-text {
-		  font-size: 24px;
-		  color: #ffffff;
-		  margin-bottom: 10px;
-		  animation: loadingtextShadow 2s infinite;
-		}
-		@keyframes loadingtextShadow {
-		  0% { text-shadow: 0 0 5px #ffffff, 0 0 10px #b0e0e6, 0 0 15px #48cae4, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff; }
-		  50% { text-shadow: 0 0 5px #ffffff, 0 0 10px #b0e0e6, 0 0 15px #48cae4, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff; }
-		  100% { text-shadow: 0 0 5px #ffffff, 0 0 10px #b0e0e6, 0 0 15px #48cae4, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff; }
-		}
-		#loading-progress {
-		  width: 200px;
-		  height: 20px;
-		  background-color: #d1ecf1;
-		  border-radius: 5px;
-		  margin: 0 auto;
-		  position: relative;
-		  overflow: hidden;
-		}
-		#loading-progress-bar {
-		  height: 100%;
-		  background: linear-gradient(to right, #00bfff, #b0e0e6);
-		  border-radius: 5px;
-		  transition: width 0.3s;
-		  width: 0;
-		}
-		#loading-progress-text {
-		  position: absolute;
-		  top: 50%;
-		  left: 50%;
-		  transform: translate(-50%, -50%);
-		  color: white;
-		  font-size: 12px;
-		}
-    #loading-progress-message {
-        position: fixed;
-		  top: 80%;
-		  left: 50%;
-		  transform: translate(-50%, -50%);
-		  color: white;
-		  font-size: 14px;
-    }
+          border: 16px solid #e6f2ff;
+          border-top: 16px solid #00bfff;
+          border-radius: 50%;
+          width: 120px;
+          height: 120px;
+          animation: spin 2s linear infinite;
+          margin-bottom: 20px;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        #loading-text {
+          font-size: 24px;
+          color: #ffffff;
+          margin-bottom: 10px;
+          animation: loadingtextShadow 2s infinite;
+        }
+        @keyframes loadingtextShadow {
+          0% { text-shadow: 0 0 5px #ffffff, 0 0 10px #b0e0e6, 0 0 15px #48cae4, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff; }
+          50% { text-shadow: 0 0 5px #ffffff, 0 0 10px #b0e0e6, 0 0 15px #48cae4, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff; }
+          100% { text-shadow: 0 0 5px #ffffff, 0 0 10px #b0e0e6, 0 0 15px #48cae4, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff; }
+        }
+        #loading-progress {
+          width: 200px;
+          height: 20px;
+          background-color: #d1ecf1;
+          border-radius: 5px;
+          margin: 0 auto;
+          position: relative;
+          overflow: hidden;
+        }
+        #loading-progress-bar {
+          height: 100%;
+          background: linear-gradient(to right, #00bfff, #b0e0e6);
+          border-radius: 5px;
+          transition: width 0.3s;
+          width: 0;
+        }
+        #loading-progress-text {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-size: 12px;
+        }
+        #loading-progress-message {
+            position: fixed;
+          top: 80%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-size: 14px;
+        }
         .coin-effect {
             position: absolute;
             top: 50%;
@@ -407,6 +384,89 @@ body::after {
             50% { background: radial-gradient(circle, rgba(0,191,255,0.6) 0%, rgba(0,191,255,0) 100%); }
             100% { background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, rgba(0,255,255,0) 100%); }
         }
+        #menu-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            animation: textShadow 2s infinite;
+        }
+        #menu-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #menu-button:active {
+            background-color: #00ffff;
+            transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #menu.open {
+            transform: translateX(0);
+        }
+        #menu button {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            animation: textShadow 2s infinite;
+            width: 80%;
+        }
+        #menu button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        #menu button:active {
+            background-color: #00ffff;
+            transform: scale(0.95);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .mini-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            color: #ffffff;
+            display: none;
+            z-index: 1001;
+        }
+        .mini-window.open {
+            display: block;
+        }
+    #gradientSelect, #applyGradientButton, #settings-close-button {
+        font-size: 24px;
+        margin: 20px;
+}
     </style>
 </head>
 <body>
@@ -426,6 +486,32 @@ body::after {
         <a href="#upgrade" class="nav-button">🌀 Upgrade</a>
         <a href="#airdrop" class="nav-button">🌙 Moondrop</a>
     </div>
+    <div id="menu-button">☰</div>
+    <div id="menu">
+        <button id="settings-button">Настройки</button>
+        <button id="support-button">Поддержка</button>
+        <button id="info-button">Информация</button>
+    </div>
+    <div id="settings-window" class="mini-window">
+        <h2>Настройки</h2>
+        <select id="gradientSelect">
+  <option value="">Select a gradient</option>
+  <option value="radial-gradient(circle at center, #000000, #191970)">Default Color</option>
+  <option value="linear-gradient(120deg, #8e44ad, #2196f3, #21cbf5, #4caf50, #ffeb3b, #ff9800, #ff5722, #f44336, #9c27b0)">Rainbow</option>
+  <option value="linear-gradient(135deg, #000000, #000000, #000000, #000000, #000000, #000000, #000000, #000000, #000000)">Black</option>
+</select>
+<button id="applyGradientButton">Apply</button>
+<button id="settings-close-button">Close</button>
+       
+    </div>
+    <div id="support-window" class="mini-window">
+        <h2>Поддержка</h2>
+        <p>Здесь будет информация о поддержке.</p>
+    </div>
+    <div id="info-window" class="mini-window">
+        <h2>Информация</h2>
+        <p>Здесь будет информация.</p>
+    </div>
     <div id="mine" class="page active">
         <div class="name">Lilik Enchantment</div>
         <div id="coin">
@@ -438,7 +524,7 @@ body::after {
                 <div id="progress-bar-fill"></div>
                 <div id="progress-text"></div>
             </div>
-            <div id="next-level">2</div>
+        <div id="next-level">2</div>
         </div>
         <div id="resetButton">Reset all progress</div>
         <div id="dailyBonus">Daily Bonus: Click to claim!</div>
@@ -466,6 +552,17 @@ body::after {
         <div id="shareButton">Share your progress</div>
     </div>
     <script>
+    const gradientSelect = document.getElementById('gradientSelect');
+const applyGradientButton = document.getElementById('applyGradientButton');
+
+applyGradientButton.addEventListener('click', () => {
+  const gradientValue = gradientSelect.value;
+  if (gradientValue) {
+    document.body.style.background = gradientValue;
+  }
+});
+
+
         const tgwindow = window.Telegram.WebApp;
         tgwindow.isExpanded;
         tgwindow.expand();
@@ -479,7 +576,6 @@ body::after {
             if (loadingProgress >= 100) {
                 clearInterval(loadingInterval);
                 document.getElementById('loading-screen').style.display = 'none';
-        
             }
         }, 100);
         let score = 0;
@@ -682,7 +778,49 @@ body::after {
         preloadImage.src = 'https://raw.githubusercontent.com/0x2171/Lilik-Enchantment/refs/heads/main/images/AppArt.png';
         preloadImage.onload = () => {
             localStorage.setItem('backgroundImageLoaded', 'true');
-        }; 
+        };
+
+        // Menu button functionality
+        const menuButton = document.getElementById('menu-button');
+        const menu = document.getElementById('menu');
+        const settingsButton = document.getElementById('settings-button');
+        const supportButton = document.getElementById('support-button');
+        const infoButton = document.getElementById('info-button');
+        const settingsWindow = document.getElementById('settings-window');
+        const settingsCloseWindow = document.getElementById('settings-close-button');
+        const supportWindow = document.getElementById('support-window');
+        const infoWindow = document.getElementById('info-window');
+
+        menuButton.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+
+        settingsButton.addEventListener('click', () => {
+            settingsWindow.classList.add('open');
+            menu.classList.remove('open');
+        });
+
+        supportButton.addEventListener('click', () => {
+            supportWindow.classList.add('open');
+            menu.classList.remove('open');
+        });
+
+        infoButton.addEventListener('click', () => {
+            infoWindow.classList.add('open');
+            menu.classList.remove('open');
+        });
+
+        settingsCloseWindow.addEventListener('click', () => {
+            settingsWindow.classList.remove('open');
+        });
+
+        supportWindow.addEventListener('click', () => {
+            supportWindow.classList.remove('open');
+        });
+
+        infoWindow.addEventListener('click', () => {
+            infoWindow.classList.remove('open');
+        });
     </script>
 </body>
 </html>
